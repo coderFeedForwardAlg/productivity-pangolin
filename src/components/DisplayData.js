@@ -21,9 +21,7 @@ const DisplayData = () => {
 
     return ( 
         <div className='display-data'>
-            <h1>react firebase project</h1>
-            {users.map( (user) => {return <div>id: {user.userID}</div>} )  }
-            {users.map( (duration) => {return <div> how long you worked: {duration.duration} </div>})}
+            {users.map( (duration) => {return <div> how long you worked in each work session: {duration.duration} </div>})}
         </div>
      );
 }
