@@ -11,15 +11,15 @@ function App() {
       <div className='App'>
         <NavBar/>
         <Switch>
-        <Route exact path='/'>
-            <h1>landing page</h1>
-          </Route>
-          <Route  path='/display'>
-            <DisplayData/>
-          </Route>
-          <Route  path='/work'>
-            <NewWorkWesh/>
-          </Route>
+            <Route exact path="/">
+              <h1>landing page</h1>
+            </Route>
+            <Route  path="/display">
+              <DisplayData/>
+            </Route>
+            <Route  path="/work">
+              <NewWorkWesh/>
+            </Route>
         </Switch>
       </div>
     </Router>
