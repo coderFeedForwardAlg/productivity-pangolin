@@ -1,10 +1,58 @@
-.App {
-  
+/*
+0E0B16
+A239CA
+4717F6
+E7DFDD
+*/ 
+
+
+* {
+    margin: 0;
+    color: #0E0B16; 
+  }
+
+
+.timer{
+    background-color: blueviolet;
+    text-align: center;
+    font-size: 200px;
 }
 
 
 
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 10px;
+    overflow: hidden;
+    background-color: #A239CA;
+  }
+  
+li {
+    float: left;
+}
+  
+  li .brandLink {
+    display: block;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  li .brandLink:hover {
+    background-color: rgb(60, 27, 60);
+  }
 
+  .new-work-sesh{
+      text-align: center;
+        padding-top: 10%;
+  }
 
+  .startBut{
+    text-align: center;
+    width: 200px;
+    height: 100px;
+    margin: 30px;
+    background-color: #A239CA;
+  }
 
 
