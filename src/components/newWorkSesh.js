@@ -1,11 +1,11 @@
-import { useState, history } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import {db} from '../firebase-config'
 import { collection, addDoc } from "firebase/firestore";
 const NewWorkWesh = () => {
     const [time, setTime] = useState(25);
     
-    history = useHistory();
+    const history = useHistory();
 
     const userCollection = collection(db, "productivityData");
     const creatWorkSesh = async ()=>{

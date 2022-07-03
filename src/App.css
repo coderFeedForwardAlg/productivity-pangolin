@@ -52,7 +52,26 @@ li {
     width: 200px;
     height: 100px;
     margin: 30px;
+    font-size: 30px;
     background-color: #A239CA;
   }
 
+  .goodWork{
+      text-align: center;
+      font-size: large;
+  }
 
+
+  .breakBut{
+    text-align: center;
+    width: 200px;
+    height: 100px;
+    margin: 30px;
+    font-size: 30px;
+    background-color: #A239CA;
+  }
+
+  .landing-page{
+      padding: 30px;
+      color: aquamarine;
+  }

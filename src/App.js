@@ -5,6 +5,7 @@ import Timer from './components/timer';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'; 
 import GoodWork from './components/goodWork';
 import Break from './components/breake';
+import Landing from './components/landing';
 
 
 
@@ -16,7 +17,7 @@ function App() {
         <Switch>
 
             <Route exact path="/">
-              <h1>Welcome to Productivity Pangolin</h1>
+              <Landing/>
             </Route>
 
             <Route  path="/display">
