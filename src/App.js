@@ -6,6 +6,11 @@ import {BrowserRouter as Router, Route, Switch} from 'react-router-dom';
 import GoodWork from './components/goodWork';
 import Break from './components/breake';
 import Landing from './components/landing';
+import Longin from './components/longin';
+import Register from './components/register';
+import Reset from './components/reset';
+import Dashboard from './components/dashboard';
+import Logout from './components/logout';
 
 
 
@@ -38,6 +43,30 @@ function App() {
 
             <Route  path="/break">
               <Break/>
+            </Route>
+
+            <Route  path="/login">
+              <Longin/>
+            </Route>
+
+            <Route  path="/register">
+              <Register/>
+            </Route>
+
+            <Route  path="/reset">
+              <Reset/>
+            </Route>
+
+            <Route  path="/dashboard">
+              <Dashboard/>
+            </Route>
+
+            <Route  path="/logout">
+              <Logout/>
+            </Route>
+
+            <Route  path="/display">
+              <DisplayData/>
             </Route>
 
 

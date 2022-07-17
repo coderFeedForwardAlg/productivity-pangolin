@@ -1,9 +1,11 @@
 import { useHistory } from "react-router-dom";
 import { useState, useEffect } from "react";
+import sound from './sound/mixkit-attention-bell-ding-586.wav';
 
 const Break = () => {
     const [time, setTime] = useState(5 * 60); // should be id 
     const history = useHistory();
+    const audio = new Audio(sound);
 
     useEffect(()=>{
         const interval = setInterval(()=>{
@@ -11,6 +13,7 @@ const Break = () => {
             setTime(time - 1);
         }, 1000); 
         if(time <= 0){
+            audio.play();
             history.push("/work");
         }
     },[time]);
