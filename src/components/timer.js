@@ -5,16 +5,25 @@ const Timer = () => {
    const { id } = useParams();
    const [time, setTime] = useState(id * 60);
    const history = useHistory();
+   const [pauseText, setPauseText] = useState("Pause Timer");
+   const [paused, setPaused] = useState(false); 
 
    useEffect(()=>{
-        const interval = setInterval(()=>{
-            clearInterval(interval);
-            setTime(time - 1);
-        }, 1000); 
+    let interval = null;
+    if(!paused){
+        interval = setInterval(()=>{
+            
+                clearInterval(interval);
+                setTime(time - 1);
+            
+        }, 1000);
+    }else {
+        clearInterval(interval);
+    }
         if(time <= 0){
             history.push("/goodWork");
         }
-   },[time]);
+   },[time, paused]);
 
    const displayTime = ()=>{
        let min = Math.floor(time / 60);
@@ -25,9 +34,24 @@ const Timer = () => {
        return `${min}:${sec}`; 
    }
 
+   const pause = () => {
+    if(!paused){
+        setPaused(true);
+        setPauseText("Start Timer");
+    }else{
+        setPaused(false);
+        setPauseText("Pause Timer");
+    }
+   }
+
+
     return ( 
         <div className="timer">
             {displayTime()}
+            <br />
+            <button className='pauseButton' onClick={pause}>
+                {pauseText}
+            </button>
         </div>
      );
 }

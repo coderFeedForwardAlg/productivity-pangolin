@@ -3,48 +3,86 @@ import { useState } from 'react';
 import '../App.css';
 import { useAuthState } from "react-firebase-hooks/auth";
 import { db, auth } from '../firebase-config'
-import { collection, query, where, getDocs } from 'firebase/firestore'
+import { collection, query, where, getDocs, orderBy } from 'firebase/firestore'
 import BarChart from './BarChart';
 
 const DisplayData = () => {
   const [workSession, setWorkSession] = useState([]);
   const userCollection = collection(db, "productivityData");
   const [user] = useAuthState(auth);
-  
+  const [userID, setUserID] = useState("");
   let durationArr = [];
   let labelsArr = [];
-  useEffect(() => {
-    const getWork = async () => {
-      
-      const q = query( collection(db, "productivityData"), where("userID", "==", "124aw1k2xhU47MSva2SxTb1IWTI3"));
-      const querySnapshot = await getDocs(q);
-      querySnapshot.forEach((doc) => {
-        durationArr.push(doc.data().duration);
-        labelsArr.push(new Date(doc.data().startWorkTime.seconds*1000).getDay());
-        
-      });
-      //console.log(durationArr);
-      //console.log(labelsArr);
-      setWorkSession(querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id})));
-      
-    };
-    getWork();
-
-  }, []);
-  
   const [workData, setWorkData] = useState({
     labels: labelsArr,
     datasets: [{
       label: "work data",
       data: durationArr,
-      backgroundColor: ["green"],
+      backgroundColor: ["purple"],
     }]
   });
+  
+
+
+  const getWork = async () => {
+    try{
+      const q = query( collection(db, "productivityData"), where("userID", "==", userID), orderBy("startWorkTime"));
+      const querySnapshot = await getDocs(q);
+      querySnapshot.forEach((doc) => {
+        durationArr.push(doc.data().duration);
+        labelsArr.push(new Date(doc.data().startWorkTime.seconds*1000).getDate());
+      });
+      setWorkSession(querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id})));
+      console.log(durationArr);
+      console.log(labelsArr);
+    } catch( err ){
+      console.log(err);
+      console.log("userID");
+    }
+    
+  };
+
+  const fetchUserID = async () => {
+        
+    try {
+        const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+        const doc = await getDocs(q);
+        const data = doc.docs[0].data();
+        setUserID(data.uid);
+        getWork();
+    } catch (err) {
+        console.error(err);
+        console.log("user?.uid");
+        //alert("you must be loged in to see your data");
+    };
+    
+  }
+
+  useEffect( ()=> {
+    fetchUserID();
+    setWorkData({
+      labels: labelsArr,
+      datasets: [{
+        label: "work data",
+        data: durationArr,
+        backgroundColor: ["purple"],
+      }]
+    });
+  },[userID, user]);
+
+
+
+  
+  
+  
+  
 
     return ( 
         <div className='display-data'>
+          
           <BarChart chartData={workData}/>
-          { workSession.map( (duration) => {return <div> how long you worked in each work session: {duration.duration} </div>}) }
+          {workSession.map( (duration) => {return <div> how long you worked: {duration.duration} </div>}) }
+          { /*<p>This chart shows how long you have worked</p> */}
         </div>
      );
 }

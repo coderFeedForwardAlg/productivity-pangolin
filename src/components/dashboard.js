@@ -9,6 +9,7 @@ const Dashboard = () => {
     const [user, loading, error] = useAuthState(auth);
     const [name, setName] = useState("");
     const history = useHistory();
+    
     const fetchUserName = async () => {
         try {
             const q = query(collection(db, "users"), where("uid", "==", user?.uid));
@@ -19,6 +20,7 @@ const Dashboard = () => {
             console.error(err);
             alert("an error occured while fetching user data");
         };
+
     }
     useEffect( () => {
         if (loading) return;
