@@ -28,6 +28,12 @@ E7DFDD
   box-shadow: #000000;
   border-style: solid;
 }
+.pauseButton:hover{
+  box-shadow: 5px 5px;
+}
+.pauseButton:checked{
+  box-shadow: 2px 2px;
+}
 
 
 
@@ -48,9 +54,17 @@ li {
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
+    
+    
   }
   li .brandLink:hover {
-    background-color: rgb(60, 27, 60);
+    box-shadow: 1px 1px 4px 4px;
+    animation-name: stand-out;
+    animation-duration: 1s;
+  }
+  @keyframes stand-out {
+    from {box-shadow: 0px 0px 0px 0px;}
+    to {box-shadow: 1px 1px 4px 4px;}
   }
 
   .new-work-sesh{

@@ -7,23 +7,8 @@ const Timer = () => {
    const history = useHistory();
    const [pauseText, setPauseText] = useState("Pause Timer");
    const [paused, setPaused] = useState(false); 
-
-   useEffect(()=>{
-    let interval = null;
-    if(!paused){
-        interval = setInterval(()=>{
-            
-                clearInterval(interval);
-                setTime(time - 1);
-            
-        }, 1000);
-    }else {
-        clearInterval(interval);
-    }
-        if(time <= 0){
-            history.push("/goodWork");
-        }
-   },[time, paused]);
+   const [countDownTime, setCountDownTime] = useState(new Date().getTime() + time * 1000);
+   const [offset, setOffset] = useState(0);
 
    const displayTime = ()=>{
        let min = Math.floor(time / 60);
@@ -34,13 +19,39 @@ const Timer = () => {
        return `${min}:${sec}`; 
    }
 
-   const pause = () => {
+   //TODO:fix bug where timer doesint start again 
+   useEffect(()=>{
+    let interval = null; 
+        interval = setInterval(()=>{
+            let now = new Date().getTime();
+            let distance = (countDownTime - now);
+            let seconds = Math.floor((distance) / 1000) ;
+            if(!paused){
+                setTime(seconds + offset);
+            }else{
+                setOffset(offset + 1);
+                console.log(offset);
+            }
+            clearInterval(interval);
+        }, 1000);
+    
+
+    if(time <= 0){
+        history.push("/goodWork");
+    }
+       
+},[time, paused, offset]);
+
+const pause = () => {
     if(!paused){
         setPaused(true);
         setPauseText("Start Timer");
-    }else{
+        console.log(paused);
+    }
+    if(paused){
         setPaused(false);
         setPauseText("Pause Timer");
+        console.log(paused);
     }
    }
 

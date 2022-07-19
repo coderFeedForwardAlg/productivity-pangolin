@@ -38,12 +38,13 @@ const DisplayData = () => {
     } catch( err ){
       console.log(err);
       console.log("userID");
+      
     }
     
   };
-
+  
   const fetchUserID = async () => {
-        
+    
     try {
         const q = query(collection(db, "users"), where("uid", "==", user?.uid));
         const doc = await getDocs(q);
@@ -52,10 +53,13 @@ const DisplayData = () => {
         getWork();
     } catch (err) {
         console.error(err);
-        console.log("user?.uid");
-        //alert("you must be loged in to see your data");
+        console.log("user?.uid"); 
     };
     
+  }
+  let fetchRes = <p></p>;
+  if(!user){
+    fetchRes = <p> Their was an error getting your data you may not be signd in or you internet conection may not be working </p>;
   }
 
   useEffect( ()=> {
@@ -70,16 +74,9 @@ const DisplayData = () => {
     });
   },[userID, user]);
 
-
-
-  
-  
-  
-  
-
     return ( 
         <div className='display-data'>
-          
+          {fetchRes}
           <BarChart chartData={workData}/>
           {workSession.map( (duration) => {return <div> how long you worked: {duration.duration} </div>}) }
           { /*<p>This chart shows how long you have worked</p> */}
