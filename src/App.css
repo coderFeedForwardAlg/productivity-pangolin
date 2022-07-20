@@ -5,20 +5,19 @@ A239CA
 E7DFDD
 */ 
 
-
 * {
     margin: 0;
     color: #0E0B16; 
   }
 
-
 .timer{
     background-color: blueviolet;
+   
     text-align: center;
     font-size: 200px;
-    height: 200%;
-    padding-bottom: 20%;
-    width: 100%;
+    width: 100%; 
+    height: 100%;
+    padding-bottom: 100%;
 }
 .pauseButton{
   font-size: 50px;
