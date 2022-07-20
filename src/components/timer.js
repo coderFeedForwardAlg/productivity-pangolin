@@ -8,7 +8,7 @@ const Timer = () => {
    const [pauseText, setPauseText] = useState("Pause Timer");
    const [paused, setPaused] = useState(false); 
    const [countDownTime, setCountDownTime] = useState(new Date().getTime() + time * 1000);
-   const [offset, setOffset] = useState(0);
+   const [offset, setOffset] = useState(1);
 
    const displayTime = ()=>{
        let min = Math.floor(time / 60);
@@ -19,28 +19,29 @@ const Timer = () => {
        return `${min}:${sec}`; 
    }
 
-   //TODO:fix bug where timer doesint start again 
    useEffect(()=>{
     let interval = null; 
-        interval = setInterval(()=>{
-            let now = new Date().getTime();
-            let distance = (countDownTime - now);
-            let seconds = Math.floor((distance) / 1000) ;
-            if(!paused){
-                setTime(seconds + offset);
-            }else{
-                setOffset(offset + 1);
-                console.log(offset);
-            }
-            clearInterval(interval);
-        }, 1000);
-    
+    interval = setInterval(()=>{
+        let now = new Date().getTime();
+        let distance = (countDownTime - now);
+        let seconds = Math.floor((distance) / 1000);
+        seconds += offset;
+        if(!paused){
+            setTime(seconds);
+            console.log(time);
+        }else{
+            setOffset(offset + 1);
+            console.log(offset);
+        }
+        clearInterval(interval);
+    }, 1000);
+        
 
-    if(time <= 0){
-        history.push("/goodWork");
-    }
+     if(time <= 0){
+         history.push("/goodWork");
+     }
        
-},[time, paused, offset]);
+    },[time, offset]);
 
 const pause = () => {
     if(!paused){
@@ -59,7 +60,7 @@ const pause = () => {
     return ( 
         <div className="timer">
             {displayTime()}
-            <br />
+            <br/>
             <button className='pauseButton' onClick={pause}>
                 {pauseText}
             </button>

@@ -4,13 +4,17 @@ import sound from './sound/mixkit-attention-bell-ding-586.wav';
 
 const Break = () => {
     const [time, setTime] = useState(5 * 60); // should be id 
+    const [countDownTime, setCountDownTime] = useState(new Date().getTime() + time * 1000);
     const history = useHistory();
     const audio = new Audio(sound);
 
     useEffect(()=>{
         const interval = setInterval(()=>{
             clearInterval(interval);
-            setTime(time - 1);
+            let now = new Date().getTime();
+            let distance = (countDownTime - now);
+            let seconds = Math.floor((distance) / 1000);
+            setTime(seconds);
         }, 1000); 
         if(time <= 0){
             audio.play();
