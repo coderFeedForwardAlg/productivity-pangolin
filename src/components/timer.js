@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
 
+
 const Timer = () => {
    const { id } = useParams();
    const [time, setTime] = useState(id * 60);
@@ -38,7 +39,7 @@ const Timer = () => {
         
 
      if(time <= 0){
-         history.push("/goodWork");
+         history.push(`/goodWork/${id}`);
      }
        
     },[time, offset]);

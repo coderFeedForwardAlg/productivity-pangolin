@@ -19,6 +19,23 @@ E7DFDD
     height: 100%;
     padding-bottom: 100%;
 }
+.set-times{
+  display: flex;
+  flex-direction: column;
+  float: left;
+}
+.set-time-but{
+  
+}
+.time-inputs{
+  font-size: medium;
+  animation-name: stand-out;
+  animation-duration: 1s;
+}
+@keyframes inputs-in {
+  from {box-shadow: 0px 0px 0px 0px;}
+  to {box-shadow: 1px 1px 4px 4px;}
+}
 .pauseButton{
   font-size: 50px;
   height: 100%;

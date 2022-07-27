@@ -1,5 +1,5 @@
 import DisplayData from './components/DisplayData';
-import NewWorkWesh from './components/newWorkSesh';
+import NewWorkSesh from './components/newWorkSesh';
 import NavBar from './components/navBar';
 import Timer from './components/timer';
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'; 
@@ -30,7 +30,7 @@ function App() {
             </Route>
 
             <Route  path="/work">
-              <NewWorkWesh/>
+              <NewWorkSesh/>
             </Route>
 
             <Route  path="/timer/:id">

@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {db, auth} from '../firebase-config'
+import {db, auth} from '../firebase-config';
 import { collection, addDoc, query,getDocs, where } from "firebase/firestore";
 
-const NewWorkWesh = () => {
+const NewWorkSesh = () => {
     const [time, setTime] = useState(25);
     
     const history = useHistory();
@@ -57,4 +57,4 @@ const NewWorkWesh = () => {
      );
 }
  
-export default NewWorkWesh;
+export default NewWorkSesh;
