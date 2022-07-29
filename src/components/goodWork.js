@@ -8,36 +8,46 @@ import { useState } from "react";
 
 
 const GoodWork = () => {
-    const { id } = useParams();
-    const [statTime, setStartTime] = useState(5);
+    const { time } = useParams();
     const audio = new Audio(sound);
     const history = useHistory();
     const [focus, setFocus] = useState(0);
+
     const breakTime = ()=>{
         history.push('/break');
     }
 
-    useEffect (() => {
+    /*useEffect (() => {
         audio.play();
-    });
+        
+    });*/
+  
 
     
     const [user] = useAuthState(auth);
 
     const userCollection = collection(db, "productivityData");
-    const creatWorkSesh = async ()=>{
+    
+    const start = ()=>{
+        createWorkSesh();
+        //history.push(`/timer/${time}`);
+    } 
+    
+    const createWorkSesh = async ()=>{
         const d = new Date(); 
 
         try {
-                       
+            const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+            const doc = await getDocs(q);
+            const data = doc.docs[0].data();
+            
             await addDoc(userCollection, {
-                duration: id, 
+                duration: time, 
                 productivity: focus, 
                 reward: null,
                 startWorkTime: d,
-                userID: user.uid
+                userID: data.uid
             });
-            alert("working");
             
         } catch (err) {
             console.error(err);
@@ -58,8 +68,9 @@ const GoodWork = () => {
                 }}
                 />
                 <br />
-                <button onClick={creatWorkSesh}>enter</button>
+                
             </form> }
+            <button onClick={start}>enter</button>
             <button className="breakBut" onClick={breakTime}>
                 Take a Break
             </button>

@@ -8,36 +8,10 @@ const NewWorkSesh = () => {
     const [time, setTime] = useState(25);
     
     const history = useHistory();
-    const [user] = useAuthState(auth);
 
-    const userCollection = collection(db, "productivityData");
-    const creatWorkSesh = async ()=>{
-        const d = new Date(); 
-
-        try {
-            const q = query(collection(db, "users"), where("uid", "==", user?.uid));
-            const doc = await getDocs(q);
-            const data = doc.docs[0].data();
-            
-            await addDoc(userCollection, {
-                duration: time, 
-                productivity: null, 
-                reward: null,
-                startWorkTime: d,
-                userID: data.uid
-            });
-            
-        } catch (err) {
-            console.error(err);
-            alert("if you are not loged in than you data will not be saved");
-        };
-            
-        
-    }
 
 
     const start = ()=>{
-        creatWorkSesh();
         history.push(`/timer/${time}`);
     }
 

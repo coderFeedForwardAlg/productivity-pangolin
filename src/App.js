@@ -37,7 +37,7 @@ function App() {
               <Timer/>
             </Route>
 
-            <Route  path="/goodWork">
+            <Route  path="/goodWork/:time">
               <GoodWork/>
             </Route>
 
