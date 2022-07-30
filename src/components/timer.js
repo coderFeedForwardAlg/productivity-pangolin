@@ -22,7 +22,7 @@ const Timer = () => {
   const startTime = new Date().getTime();
 
   let timePaused = 0; 
-   useEffect(()=>{
+   //useEffect(()=>{
     let interval = null; 
     interval = setInterval(()=>{
         let now = new Date().getTime();
@@ -31,8 +31,6 @@ const Timer = () => {
         if(!paused){
             setTime(seconds);
             console.log(time);
-        }else{
-            
         }
         clearInterval(interval);
     }, 1000 );
@@ -42,7 +40,7 @@ const Timer = () => {
         history.push(`/goodWork/${id}`);
      }
        
-    },[time, countDownTime]);
+    //},[time, countDownTime, paused]);
 
 const pause = () => {
     if(!paused){
