@@ -1,23 +1,20 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 
-
-const NewWorkSesh = () => {
-    const [time, setTime] = useState(25);
+const NewBreak = () => {
+    const [time, setTime] = useState(5);
     
     const history = useHistory();
 
-
-
     const start = ()=>{
-        history.push(`/timer/${time}`);
+        history.push(`/break/${time}`);
     }
 
     return ( 
-        <div className="new-work-sesh">
+        <div className="new-break">
             <form>
-                <label id="new-work-lable"><h2>How Long Do You Want To Work</h2></label>
-                <input placeholder="25" onChange={(e)=>{
+                <h2>How Long Do You Want to Take a Break</h2>
+                <input placeholder="5" onChange={(e)=>{
                     setTime(e.target.value);
                 }}/>
                 {/*<error>{ errors.duration?.type === "required" && "please enter a value"}</error>
@@ -29,4 +26,4 @@ const NewWorkSesh = () => {
      );
 }
  
-export default NewWorkSesh;
+export default NewBreak;

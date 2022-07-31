@@ -1,5 +1,6 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import sound from './sound/mixkit-attention-bell-ding-586.wav';
 
 
 const Timer = () => {
@@ -10,6 +11,7 @@ const Timer = () => {
    const [paused, setPaused] = useState(false); 
    const [countDownTime, setCountDownTime] = useState(new Date().getTime() + time * 1000);
    const [startPauseTime, setStartPauseTime] = useState(0);
+   const audio = new Audio(sound);
 
    const displayTime = ()=>{
        let min = Math.floor(time / 60);
@@ -19,10 +21,9 @@ const Timer = () => {
        }
        return `${min}:${sec}`; 
    }
-  const startTime = new Date().getTime();
 
   let timePaused = 0; 
-   //useEffect(()=>{
+  
     let interval = null; 
     interval = setInterval(()=>{
         let now = new Date().getTime();
@@ -37,10 +38,11 @@ const Timer = () => {
         
 
      if(time <= 0){
+        audio.play();
         history.push(`/goodWork/${id}`);
      }
        
-    //},[time, countDownTime, paused]);
+   
 
 const pause = () => {
     if(!paused){

@@ -1,6 +1,4 @@
-import { useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import sound from './sound/mixkit-attention-bell-ding-586.wav';
 import {db, auth} from '../firebase-config'
 import { useAuthState } from "react-firebase-hooks/auth";
 import { collection, addDoc, query, getDocs, where } from "firebase/firestore";
@@ -9,18 +7,8 @@ import { useState } from "react";
 
 const GoodWork = () => {
     const { time } = useParams();
-    const audio = new Audio(sound);
     const history = useHistory();
     const [focus, setFocus] = useState(0);
-
-    const breakTime = ()=>{
-        history.push('/break');
-    }
-
-    /*useEffect (() => {
-        audio.play();
-        
-    });*/
   
 
     
@@ -30,7 +18,7 @@ const GoodWork = () => {
     
     const start = ()=>{
         createWorkSesh();
-        //history.push(`/timer/${time}`);
+        history.push(`/new/break`);
     } 
     
     const createWorkSesh = async ()=>{
@@ -51,7 +39,6 @@ const GoodWork = () => {
             
         } catch (err) {
             console.error(err);
-            alert("if you are not loged in than you data will not be saved");
         };
             
         
@@ -70,8 +57,7 @@ const GoodWork = () => {
                 <br />
                 
             </form> }
-            <button onClick={start}>enter</button>
-            <button className="breakBut" onClick={breakTime}>
+            <button className="breakBut" onClick={start}>
                 Take a Break
             </button>
         </div>

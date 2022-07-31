@@ -1,9 +1,10 @@
-import { useHistory } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import sound from './sound/mixkit-attention-bell-ding-586.wav';
 
 const Break = () => {
-    const [time, setTime] = useState(5 * 60); // should be id 
+    const { timeparam } = useParams();
+    const [time, setTime] = useState(timeparam * 60); 
     const [countDownTime, setCountDownTime] = useState(new Date().getTime() + time * 1000);
     const history = useHistory();
     const audio = new Audio(sound);
