@@ -42,6 +42,13 @@ const Timer = () => {
         history.push(`/goodWork/${id}`);
      }
        
+    const endTimer = () => {
+        const  now = new Date().getTime();
+        const distance = (countDownTime - now);
+        const seconds = Math.floor((distance) / 1000);
+        const timeDone = id * 60 - seconds;
+        history.push(`/goodWork/${timeDone}`);
+    } 
    
 
 const pause = () => {
@@ -73,6 +80,7 @@ const pause = () => {
             <button className='pauseButton' onClick={pause}>
                 {pauseText}
             </button>
+            <button className="pausedButton" onClick={endTimer}>end timer</button>
         </div>
      );
 }
