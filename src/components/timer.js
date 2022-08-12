@@ -80,7 +80,7 @@ const pause = () => {
             <button className='pauseButton' onClick={pause}>
                 {pauseText}
             </button>
-            <button className="pausedButton" onClick={endTimer}>end timer</button>
+            {/*<button className="pausedButton" onClick={endTimer}>end timer</button> */}
         </div>
      );
 }

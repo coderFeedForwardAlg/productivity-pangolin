@@ -45,7 +45,7 @@ const Longin = () => {
                         logInWithEmailAndPassword(email, password)
                     }}
                 >
-                    Longin
+                    Login
                 </button>
                 {/*<button className="login-with-google" onClick={signInWithGoogle}>
                     Longin With Google
