@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
-
+import pangolinPic from './imgs/pangolinImg.png';
 
 const NewWorkSesh = () => {
     const [time, setTime] = useState(25);
@@ -15,6 +15,7 @@ const NewWorkSesh = () => {
 
     return ( 
         <div className="new-work-sesh">
+            <img src = {pangolinPic} style={{ width: '400px', float: "left"}}/>
             <form>
                 <label id="new-work-lable"><h2>How Long Do You Want To Work</h2></label>
                 <input placeholder="25" onChange={(e)=>{
