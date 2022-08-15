@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import pangolinPic from './imgs/pangolinImg.png';
+import StudyMusic from "./StudyMusic";
 
 const NewWorkSesh = () => {
     const [time, setTime] = useState(25);
@@ -12,7 +13,7 @@ const NewWorkSesh = () => {
     const start = ()=>{
         history.push(`/timer/${time}`);
     }
-
+        //TODO: fix stile of pic 
     return ( 
         <div className="new-work-sesh">
             <img src = {pangolinPic} style={{ width: '400px', float: "left"}}/>
@@ -26,6 +27,7 @@ const NewWorkSesh = () => {
                 
             </form>
             <button className="startBut" onClick={start}>Start</button>
+            <StudyMusic />
         </div>
      );
 }
