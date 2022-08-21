@@ -43,6 +43,7 @@ E7DFDD
   border: #0E0B16;
   box-shadow: #000000;
   border-style: solid;
+  margin: 30px;
 }
 .pauseButton:hover{
   box-shadow: 5px 5px;
@@ -128,4 +129,12 @@ li {
     .timer{
       font-size: 100px;
     }
+  }
+
+  .card{
+    font-size: 20px;
+    background-color: #A239CA;
+    border: #000000;
+    width: max-content;
+    margin: 0 auto;
   }

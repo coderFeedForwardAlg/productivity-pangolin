@@ -37,17 +37,33 @@ const Timer = () => {
     }, 1000 );
         
 
-     if(time <= 0){
+    if(time <= 0){
         audio.play();
         history.push(`/goodWork/${id}`);
-     }
-       
+    }
+    
+    const [wantEndCard, setWantEndCard] = useState(<div> </div>);
+
+    const wantToEndTimer = () => {
+        setWantEndCard(<div className="card"> 
+            Do you want to end? 
+            <br />
+            <button className="pauseButton" onClick={endTimer}> end timer</button>
+            <br />
+            <button className="pauseButton" onClick={dontEndTimer}> dont end timer</button>
+        
+        </div>) 
+    }
+
     const endTimer = () => {
         const  now = new Date().getTime();
         const distance = (countDownTime - now);
         const seconds = Math.floor((distance) / 1000);
         const timeDone = id * 60 - seconds;
         history.push(`/goodWork/${timeDone}`);
+    } 
+    const dontEndTimer = () => {
+        setWantEndCard(<div> </div>)
     } 
    
 
@@ -77,10 +93,11 @@ const pause = () => {
         <div className="timer">
             {displayTime()}
             <br/>
+            {wantEndCard}
             <button className='pauseButton' onClick={pause}>
                 {pauseText}
             </button>
-            {/*<button className="pausedButton" onClick={endTimer}>end timer</button> */}
+            <button className="pauseButton" onClick={wantToEndTimer}> end timer</button>
         </div>
      );
 }

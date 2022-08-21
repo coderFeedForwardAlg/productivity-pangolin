@@ -27,7 +27,7 @@ const NewWorkSesh = () => {
                 
             </form>
             <button className="startBut" onClick={start}>Start</button>
-            <StudyMusic />
+            {/* <StudyMusic /> */}
         </div>
      );
 }
