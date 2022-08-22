@@ -136,5 +136,17 @@ li {
     background-color: #A239CA;
     border: #000000;
     width: max-content;
-    margin: 0 auto;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: rotateX(0deg) translate(-50%, -50%);
+    border-radius: 10%;
+    border-style: solid;
+    /*animation-name: open-card;
+    animation-duration: 1s; ****** animation did not work like I thought ********/ 
+  }
+
+  @keyframes open-card {
+    from {transform: rotateX(90deg) translate(-50%, -50%);}
+    to {transform: rotateX(0deg) translate(-50%, -50%);}
   }
