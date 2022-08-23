@@ -12,7 +12,7 @@ const NavBar = () => {
         link = "/logout";
     }
     return ( 
-        <nav className="navBar">
+        <nav className="nav-bar">
             <ul className='links'>
                 <li> <Link to="/" className='brandLink'><h1>Productivity Pangolin</h1> </Link></li>
                 <li><Link to="/work" className='brandLink'><h1>Work</h1> </Link> </li>
