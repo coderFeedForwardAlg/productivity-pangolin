@@ -52,7 +52,6 @@ E7DFDD
 }
 
 
-
 ul {
     list-style-type: none;
     margin: 0;
@@ -124,11 +123,40 @@ li {
     width: 90%;
   }
 
-  @media screen and (max-width: 681px){
-    .timer{
-      font-size: 100px;
-    }
+  .login-textbox{
+    width: max-content;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
   }
+  .longin-btn{
+    text-align: center;
+    width: max-content;
+    height: max-content;
+    margin: 5px;
+    font-size: 30px;
+    background-color: #A239CA;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%);
+  }
+  .login-container{
+    width: max-content;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    border-radius: 10%;
+    border-style: solid;
+  }
+  .longin{
+    background-color: blueviolet;
+    position: absolute;
+    height: 100%;
+    width: 100%;
+  }
+
+
+
 
   .card{
     font-size: 20px;
@@ -148,4 +176,12 @@ li {
   @keyframes open-card {
     from {transform: rotateX(90deg) translate(-50%, -50%);}
     to {transform: rotateX(0deg) translate(-50%, -50%);}
+  }
+
+
+
+  @media screen and (max-width: 681px){
+    .timer{
+      font-size: 100px;
+    }
   }
