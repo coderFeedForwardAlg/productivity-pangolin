@@ -148,11 +148,17 @@ li {
     border-radius: 10%;
     border-style: solid;
   }
-  .longin{
+
+  .logout-btn{
+    width: max-content;
+    position: relative;
+    left: 50%;
+    transform: translate(-50%, 50%);
+    font-size: 50px;
     background-color: blueviolet;
-    position: absolute;
-    height: 100%;
-    width: 100%;
+    border: #0E0B16;
+    box-shadow: #000000;
+    border-style: solid;
   }
 
 
