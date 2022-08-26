@@ -21,12 +21,12 @@ const Register = () => {
     };
     useEffect( () => {
         if (loading) return;
-        if (user) history.push("/dashboard");
+        if (user) history.push("/work");
     }, [user, loading]);
 
     return ( 
-    <div className="register">
-        <div className="register-container">
+    <div className="longin">
+        <div className="login-container">
             <input 
                 type="text"
                 className="register-textbox"
@@ -54,7 +54,7 @@ const Register = () => {
                 }}
                 placeholder="Password"
              />
-             <button className="register-btn" onClick={register}>
+             <button className="longin-btn" onClick={register}>
                  Register
              </button>
             {/*} <button className="register-btn register-google"  onClick={signInWithGoogle}>

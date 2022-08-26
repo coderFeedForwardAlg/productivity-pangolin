@@ -59,7 +59,7 @@ const Timer = () => {
         const  now = new Date().getTime();
         const distance = (countDownTime - now);
         const seconds = Math.floor((distance) / 1000);
-        const timeDone = id * 60 - seconds;
+        const timeDone = (id * 60 - seconds) / 60;
         history.push(`/goodWork/${timeDone}`);
     } 
     const dontEndTimer = () => {
