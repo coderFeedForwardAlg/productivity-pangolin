@@ -1,3 +1,5 @@
+
+// photo licenc agreement: https://www.shutterstock.com/license
 import { useState } from "react";
 import { useHistory } from "react-router-dom";
 import pangolinPic from './imgs/pangolinImg.png';
