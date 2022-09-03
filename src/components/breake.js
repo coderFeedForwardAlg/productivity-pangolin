@@ -33,6 +33,7 @@ const Break = () => {
     }
     return ( 
         <div className="timer">
+            <h3 className='timer-text'>Break Time!</h3>
             {displayTime()}
         </div>
      );

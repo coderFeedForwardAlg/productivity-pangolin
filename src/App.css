@@ -18,6 +18,11 @@ E7DFDD
     padding-bottom: 100%;
     position: fixed;
 }
+
+.timer-text{
+  font-size: 40px;
+}
+
 .set-times{
   display: flex;
   flex-direction: column;

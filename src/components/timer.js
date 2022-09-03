@@ -91,6 +91,7 @@ const pause = () => {
 
     return ( 
         <div className="timer">
+            <h3 className='timer-text'>Study Time!</h3>
             {displayTime()}
             <br/>
             {wantEndCard}

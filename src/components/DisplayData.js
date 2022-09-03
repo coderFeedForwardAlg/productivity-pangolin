@@ -78,7 +78,7 @@ const DisplayData = () => {
         <div className='display-data'>
           {fetchRes}
           <BarChart chartData={workData}/>
-          {workSession.map( (duration) => {return <div> how long you worked: {duration.duration} </div>}) }
+          {/*workSession.map( (duration) => {return <div> how long you worked: {duration.duration} </div>}) */}
           { /*<p>This chart shows how long you have worked</p> */}
         </div>
      );
