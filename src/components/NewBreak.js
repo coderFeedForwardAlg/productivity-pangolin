@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 
 const NewBreak = () => {
@@ -8,6 +9,15 @@ const NewBreak = () => {
 
     const start = ()=>{
         history.push(`/break/${time}`);
+    }
+
+        // for when user hits enter key insted of start button 
+    document.onkeydown = function(e){
+        e = e || window.event;
+        let key = e.which || e.keyCode;
+        if(key===13){
+            start();
+        }
     }
 
     return ( 

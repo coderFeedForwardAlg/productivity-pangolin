@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useHistory, useParams } from "react-router-dom";
 import {db, auth} from '../firebase-config'
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -20,6 +21,15 @@ const GoodWork = () => {
         createWorkSesh();
         history.push(`/new/break`);
     } 
+
+        // for when user hits enter key insted of start button 
+    document.onkeydown = function(e){
+        e = e || window.event;
+        let key = e.which || e.keyCode;
+        if(key===13){
+            start();
+        }
+    }
     
     const createWorkSesh = async ()=>{
         const d = new Date(); 

@@ -1,6 +1,7 @@
 
 // photo licenc agreement: https://www.shutterstock.com/license
 import { useState } from "react";
+import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import pangolinPic from './imgs/pangolinImg.png';
 import StudyMusic from "./StudyMusic";
@@ -10,7 +11,16 @@ const NewWorkSesh = () => {
     
     const history = useHistory();
 
-
+    
+        // for when user hits enter insted of using button 
+        // TODO: this uses deprecated code 
+      document.onkeydown = function(e){
+        e = e || window.event;
+        let key = e.which || e.keyCode;
+        if(key===13){
+            start();
+        }
+    }
 
     const start = ()=>{
         history.push(`/timer/${time}`);

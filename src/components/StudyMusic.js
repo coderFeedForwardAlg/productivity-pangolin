@@ -1,3 +1,5 @@
+// refrence for generating lofi midi: https://www.kaggle.com/code/zakarii/lo-fi-hip-hop-generation
+
 import audioML1 from './sound/output.wav';
 import audioDing from './sound/mixkit-attention-bell-ding-586.wav';
 
@@ -24,5 +26,5 @@ const StudyMusic = () => {
         </div>
     );
 }
- 
+
 export default StudyMusic;
