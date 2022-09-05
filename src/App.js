@@ -23,6 +23,10 @@ function App() {
         <Switch>
 
             <Route exact path="/">
+              <NewWorkSesh/>
+            </Route>
+
+            <Route exact path="/landing">
               <Landing/>
             </Route>
 
