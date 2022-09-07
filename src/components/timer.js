@@ -12,6 +12,9 @@ const Timer = () => {
    const [countDownTime, setCountDownTime] = useState(new Date().getTime() + time * 1000);
    const [startPauseTime, setStartPauseTime] = useState(0);
    const audio = new Audio(sound);
+   audio.muted = true;
+   audio.play();
+   audio.muted = false;  // so the sound will play in bachground tabs. 
 
    const displayTime = ()=>{
        let min = Math.floor(time / 60);
@@ -35,6 +38,7 @@ const Timer = () => {
         }
         clearInterval(interval);
     }, 1000 );
+
         
 
     if(time <= 0){
@@ -47,7 +51,7 @@ const Timer = () => {
     const wantToEndTimer = () => {
         setWantEndCard(<div className="card"> 
             Do you want to end? 
-            <br />
+            <br />  
             <button className="pauseButton" onClick={endTimer}> end timer</button>
             <br />
             <button className="pauseButton" onClick={dontEndTimer}> dont end timer</button>
