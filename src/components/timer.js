@@ -13,20 +13,19 @@ const Timer = () => {
    const [startPauseTime, setStartPauseTime] = useState(0);
    const audio = new Audio(sound);
    audio.muted = true;
-   audio.play();
-   audio.muted = false;  // so the sound will play in bachground tabs. 
+   audio.play();  // so the sound will play in bachground tab 
 
-   const displayTime = ()=>{
-       let min = Math.floor(time / 60);
-       let sec = time % 60; 
-       if(sec < 10){
-        return `${min}:0${sec}`;
-       }
-       return `${min}:${sec}`; 
-   }
+    const displayTime = ()=>{
+        let min = Math.floor(time / 60);
+        let sec = time % 60; 
+        if(sec < 10){
+            return `${min}:0${sec}`;
+        }
+        return `${min}:${sec}`; 
+    }
 
-  let timePaused = 0; 
-  
+    let timePaused = 0; 
+
     let interval = null; 
     interval = setInterval(()=>{
         let now = new Date().getTime();
@@ -39,9 +38,8 @@ const Timer = () => {
         clearInterval(interval);
     }, 1000 );
 
-        
-
     if(time <= 0){
+        audio.muted = false;
         audio.play();
         history.push(`/goodWork/${id}`);
     }
@@ -55,7 +53,6 @@ const Timer = () => {
             <button className="pauseButton" onClick={endTimer}> end timer</button>
             <br />
             <button className="pauseButton" onClick={dontEndTimer}> dont end timer</button>
-        
         </div>) 
     }
 
