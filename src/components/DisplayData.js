@@ -13,10 +13,28 @@ const DisplayData = () => {
   const [userID, setUserID] = useState("");
   let durationArr = [];
   let labelsArr = [];
+  let focusArr = [];
+  let focusAndworkArr = [];
   const [workData, setWorkData] = useState({
     labels: labelsArr,
     datasets: [{
       label: "work data",
+      data: durationArr,
+      backgroundColor: ["purple"],
+    }]
+  });
+  const [focusData, setfocusData] = useState({
+    labels: labelsArr,
+    datasets: [{
+      label: "focus data",
+      data: durationArr,
+      backgroundColor: ["purple"],
+    }]
+  });
+  const [focusAndWorkData, setfocusAndWorkData] = useState({
+    labels: labelsArr,
+    datasets: [{
+      label: "focus data",
       data: durationArr,
       backgroundColor: ["purple"],
     }]
@@ -31,6 +49,9 @@ const DisplayData = () => {
       querySnapshot.forEach((doc) => {
         durationArr.push(doc.data().duration);
         labelsArr.push(new Date(doc.data().startWorkTime.seconds*1000).getDate());
+        focusArr.push(doc.data().productivity);
+        focusAndworkArr.push(durationArr[durationArr.length - 1] * focusArr[focusArr.length - 1]);
+        console.log(focusAndworkArr);
       });
       setWorkSession(querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id})));
       console.log(durationArr);
@@ -66,18 +87,49 @@ const DisplayData = () => {
     fetchUserID();
     setWorkData({
       labels: labelsArr,
-      datasets: [{
+      datasets: [
+      {
         label: "work data",
         data: durationArr,
         backgroundColor: ["purple"],
-      }]
+      }
+    ]
+    });
+
+    setfocusData({
+      labels: labelsArr,
+      datasets: [
+      {
+        label: "focus data",
+        data: focusArr,
+        backgroundColor: ["purple"],
+      }
+    ]
+    });
+
+    setfocusAndWorkData({
+      labels: labelsArr,
+      datasets: [
+      {
+        label: "focus times work",
+        data: focusAndworkArr,
+        backgroundColor: ["purple"],
+      }
+    ]
     });
   },[userID, user]);
+
+  
+  
+
+  
 
     return ( 
         <div className='display-data'>
           {fetchRes}
-          <BarChart chartData={workData}/>
+          <BarChart chartData={focusAndWorkData} />
+          <BarChart chartData={workData} />
+          <BarChart chartData={focusData} />
           {/*workSession.map( (duration) => {return <div> how long you worked: {duration.duration} </div>}) */}
           { /*<p>This chart shows how long you have worked</p> */}
         </div>
