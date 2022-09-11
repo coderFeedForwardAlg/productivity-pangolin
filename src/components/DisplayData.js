@@ -89,7 +89,7 @@ const DisplayData = () => {
       labels: labelsArr,
       datasets: [
       {
-        label: "work data",
+        label: "time working",
         data: durationArr,
         backgroundColor: ["purple"],
       }
@@ -100,7 +100,7 @@ const DisplayData = () => {
       labels: labelsArr,
       datasets: [
       {
-        label: "focus data",
+        label: "focus from 1 to 10",
         data: focusArr,
         backgroundColor: ["purple"],
       }
@@ -119,15 +119,12 @@ const DisplayData = () => {
     });
   },[userID, user]);
 
-  
-  
 
-  
 
     return ( 
         <div className='display-data'>
           {fetchRes}
-          <BarChart chartData={focusAndWorkData} />
+          <BarChart chartData={focusAndWorkData}  />
           <BarChart chartData={workData} />
           <BarChart chartData={focusData} />
           {/*workSession.map( (duration) => {return <div> how long you worked: {duration.duration} </div>}) */}

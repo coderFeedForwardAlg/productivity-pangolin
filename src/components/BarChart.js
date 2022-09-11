@@ -15,6 +15,14 @@ const BarChart = ({chartData}) => {
                     display: true,
                     position: "bottom"
                  }
+                },
+                scales: {
+                  x: {
+                    title: {
+                      display: true,
+                      text: "day of the month",
+                    }
+                  },
                 }
               }} />
         </div>
