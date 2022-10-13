@@ -132,7 +132,9 @@ li {
 
   .landing-page{
       padding: 30px;
-      color: aquamarine;
+      background: linear-gradient(to left,#8110a0  0%,  #3beefe 100%);
+      background-size: cover;
+      height: 100vh;
   }
   .bar-chart{
     width: 90%;
