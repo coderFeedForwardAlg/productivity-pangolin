@@ -10,6 +10,12 @@ E7DFDD
     color: #0E0B16; 
   }
 
+  .longin{
+    background: linear-gradient(to left,#8110a0  0%,  #3beefe 100%);
+    background-size: cover;
+    height: 100vh;
+  }
+
 .timer{
     background: linear-gradient(to left,#8110a0  0%,  #3beefe 100%);
     text-align: center;
@@ -158,12 +164,14 @@ li {
     transform: translate(-50%);
   }
   .login-container{
+    overflow:auto;
     width: max-content;
     position: relative;
     left: 50%;
     transform: translate(-50%, 50%);
     border-radius: 10%;
     border-style: solid;
+    
   }
 
   .logout-btn{
@@ -184,6 +192,7 @@ li {
 
   .card{
     font-size: 20px;
+    padding: 3%;
     background-color: #A239CA;
     border: #000000;
     width: max-content;

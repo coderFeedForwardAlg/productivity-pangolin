@@ -5,8 +5,13 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import pangolinPic from './imgs/pangolinImg.png';
 import StudyMusic from "./StudyMusic";
+import { auth } from "../firebase-config";
+import { useAuthState } from "react-firebase-hooks/auth";
+
 
 const NewWorkSesh = () => {
+    const [user] = useAuthState(auth);
+    const [notLogIn, setNotLogIn] = useState(<div> </div>)
     const [time, setTime] = useState(25);
     
     const history = useHistory();
@@ -23,7 +28,27 @@ const NewWorkSesh = () => {
     }
 
     const start = ()=>{
+        // if user them card 
+        if(user){
+            history.push(`/timer/${time}`);
+        }else{
+            setNotLogIn(
+                <div className="card"> 
+                     You are not loged in <br /> do you want to continue without saving your work?
+                    <br />  
+                    <button className="pauseButton" onClick={logIn}> Log In</button>
+                    <br />
+                    <button className="pauseButton" onClick={startAnyway}> Continue</button>
+                </div>
+            );
+        }
+        
+    }
+    const startAnyway = () =>{
         history.push(`/timer/${time}`);
+    }
+    const logIn = () =>{
+        history.push(`/login`);
     }
         //TODO: fix stile of pic 
     return ( 
@@ -38,8 +63,10 @@ const NewWorkSesh = () => {
                 <error>{errors.duration?.type === "pattern" && "please only enter numbers"}</error> */}
                 
             </form>
+            {notLogIn}
             <button className="startBut" onClick={start}>Start</button>
             {/* <StudyMusic /> */}
+            
         </div>
      );
 }

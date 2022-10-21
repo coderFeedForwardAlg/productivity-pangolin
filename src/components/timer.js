@@ -50,9 +50,9 @@ const Timer = () => {
         setWantEndCard(<div className="card"> 
             Do you want to end? 
             <br />  
-            <button className="pauseButton" onClick={endTimer}> end timer</button>
+            <button className="pauseButton" onClick={endTimer}> End Timer</button>
             <br />
-            <button className="pauseButton" onClick={dontEndTimer}> dont end timer</button>
+            <button className="pauseButton" onClick={dontEndTimer}> Don't End Timer</button>
         </div>) 
     }
 
@@ -99,7 +99,7 @@ const pause = () => {
             <button className='pauseButton' onClick={pause}>
                 {pauseText}
             </button>
-            <button className="pauseButton" onClick={wantToEndTimer}> end timer</button>
+            <button className="pauseButton" onClick={wantToEndTimer}> End Timer</button>
         </div>
      );
 }
