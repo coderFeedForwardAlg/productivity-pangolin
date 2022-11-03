@@ -11,10 +11,22 @@ const DisplayData = () => {
   const userCollection = collection(db, "productivityData");
   const [user] = useAuthState(auth);
   const [userID, setUserID] = useState("");
+
   let durationArr = [];
   let labelsArr = [];
   let focusArr = [];
   let focusAndworkArr = [];
+
+  let td = true;
+  const todaysData = () =>{
+    if(td == false){
+      td = true;
+    }else{
+      td = false;
+    }
+    fetchUserID();
+  }
+
   const [workData, setWorkData] = useState({
     labels: labelsArr,
     datasets: [{
@@ -47,11 +59,24 @@ const DisplayData = () => {
       const q = query( collection(db, "productivityData"), where("userID", "==", userID), orderBy("startWorkTime"));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
-        durationArr.push(doc.data().duration);
-        labelsArr.push(new Date(doc.data().startWorkTime.seconds*1000).getDate());
-        focusArr.push(doc.data().productivity);
-        focusAndworkArr.push(durationArr[durationArr.length - 1] * focusArr[focusArr.length - 1]);
-        console.log(focusAndworkArr);
+        let today = new Date();
+        if(td){
+          if((doc.data().startWorkTime.toDate().toString().substring(0,8) == today.toString().substring(0,8))){
+            durationArr.push(doc.data().duration);
+            labelsArr.push(new Date(doc.data().startWorkTime.seconds*1000).getDate());
+            focusArr.push(doc.data().productivity);
+            focusAndworkArr.push(durationArr[durationArr.length - 1] * focusArr[focusArr.length - 1]);
+            //console.log(focusAndworkArr);
+          }
+        }else{
+          durationArr.push(doc.data().duration);
+          labelsArr.push(new Date(doc.data().startWorkTime.seconds*1000).getDate());
+          focusArr.push(doc.data().productivity);
+          focusAndworkArr.push(durationArr[durationArr.length - 1] * focusArr[focusArr.length - 1]);
+        }
+        
+        
+        
       });
       setWorkSession(querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id})));
       console.log(durationArr);
@@ -59,7 +84,6 @@ const DisplayData = () => {
     } catch( err ){
       console.log(err);
       console.log("userID");
-      
     }
     
   };
@@ -123,6 +147,7 @@ const DisplayData = () => {
 
     return ( 
         <div className='display-data'>
+          <button className="startBut" onClick={todaysData}>just today</button>
           {fetchRes}
           <BarChart chartData={focusAndWorkData}  />
           <BarChart chartData={workData} />
