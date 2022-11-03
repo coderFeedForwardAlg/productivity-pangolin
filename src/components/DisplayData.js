@@ -12,20 +12,13 @@ const DisplayData = () => {
   const [user] = useAuthState(auth);
   const [userID, setUserID] = useState("");
 
-  let durationArr = [];
+
   let labelsArr = [];
+  let durationArr = [];
   let focusArr = [];
   let focusAndworkArr = [];
-
-  let td = true;
-  const todaysData = () =>{
-    if(td == false){
-      td = true;
-    }else{
-      td = false;
-    }
-    fetchUserID();
-  }
+  let justTodayFocusAndworkArr = [];
+  let todayLabels = [];
 
   const [workData, setWorkData] = useState({
     labels: labelsArr,
@@ -51,6 +44,15 @@ const DisplayData = () => {
       backgroundColor: ["purple"],
     }]
   });
+
+  const [justTodayFocusAndworkData, setjustTodayFocusAndworkData] = useState({
+    labels: labelsArr,
+    datasets: [{
+      label: "focus data",
+      data: durationArr,
+      backgroundColor: ["purple"],
+    }]
+  });
   
 
 
@@ -60,20 +62,17 @@ const DisplayData = () => {
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
         let today = new Date();
-        if(td){
-          if((doc.data().startWorkTime.toDate().toString().substring(0,8) == today.toString().substring(0,8))){
-            durationArr.push(doc.data().duration);
-            labelsArr.push(new Date(doc.data().startWorkTime.seconds*1000).getDate());
-            focusArr.push(doc.data().productivity);
-            focusAndworkArr.push(durationArr[durationArr.length - 1] * focusArr[focusArr.length - 1]);
-            //console.log(focusAndworkArr);
-          }
-        }else{
-          durationArr.push(doc.data().duration);
-          labelsArr.push(new Date(doc.data().startWorkTime.seconds*1000).getDate());
-          focusArr.push(doc.data().productivity);
-          focusAndworkArr.push(durationArr[durationArr.length - 1] * focusArr[focusArr.length - 1]);
+        
+        if((doc.data().startWorkTime.toDate().toString().substring(0,8) == today.toString().substring(0,8))){
+          justTodayFocusAndworkArr.push(durationArr[durationArr.length - 1] * focusArr[focusArr.length - 1]);
+          todayLabels.push("today");
         }
+        
+        durationArr.push(doc.data().duration);
+        labelsArr.push(new Date(doc.data().startWorkTime.seconds*1000).getDate());
+        focusArr.push(doc.data().productivity);
+        focusAndworkArr.push(durationArr[durationArr.length - 1] * focusArr[focusArr.length - 1]);
+        
         
         
         
@@ -141,17 +140,31 @@ const DisplayData = () => {
       }
     ]
     });
+
+
+    setjustTodayFocusAndworkData({
+      labels: todayLabels,
+      datasets: [
+      {
+        label: "todays focus times work",
+        data: justTodayFocusAndworkArr,
+        backgroundColor: ["purple"],
+      }
+    ]
+    });
+
   },[userID, user]);
 
 
 
     return ( 
         <div className='display-data'>
-          <button className="startBut" onClick={todaysData}>just today</button>
           {fetchRes}
+          <BarChart chartData={justTodayFocusAndworkData} />
           <BarChart chartData={focusAndWorkData}  />
           <BarChart chartData={workData} />
           <BarChart chartData={focusData} />
+          
           {/*workSession.map( (duration) => {return <div> how long you worked: {duration.duration} </div>}) */}
           { /*<p>This chart shows how long you have worked</p> */}
         </div>
