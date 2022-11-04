@@ -5,6 +5,8 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { db, auth } from '../firebase-config'
 import { collection, query, where, getDocs, orderBy } from 'firebase/firestore'
 import BarChart from './BarChart';
+import * as tf from '@tensorflow/tfjs';
+
 
 const DisplayData = () => {
   const [workSession, setWorkSession] = useState([]);
@@ -65,7 +67,8 @@ const DisplayData = () => {
         
         if((doc.data().startWorkTime.toDate().toString().substring(0,8) == today.toString().substring(0,8))){
           justTodayFocusAndworkArr.push(durationArr[durationArr.length - 1] * focusArr[focusArr.length - 1]);
-          todayLabels.push("today");
+          let ST = new Date(doc.data().startWorkTime.seconds*1000);
+          todayLabels.push(ST.getHours() + ":"+  ST.getMinutes());
         }
         
         durationArr.push(doc.data().duration);
@@ -155,6 +158,20 @@ const DisplayData = () => {
 
   },[userID, user]);
 
+// ML modle 
+const a = tf.variable(tf.scalar(Math.random()));
+const b = tf.variable(tf.scalar(Math.random()));
+const c = tf.variable(tf.scalar(Math.random()));
+const d = tf.variable(tf.scalar(Math.random()));
+function predict(x) {
+  // y = a * x ^ 3 + b * x ^ 2 + c * x + d
+  return tf.tidy(() => {
+    return a.mul(x.pow(tf.scalar(3))) // a * x^3
+      .add(b.mul(x.square())) // + b * x ^ 2
+      .add(c.mul(x)) // + c * x
+      .add(d); // + d
+  });
+}
 
 
     return ( 
