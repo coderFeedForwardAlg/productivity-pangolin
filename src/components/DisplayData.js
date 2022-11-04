@@ -15,13 +15,15 @@ const DisplayData = () => {
   const [userID, setUserID] = useState("");
 
 
-  let labelsArr = [];
+  let labelsArr = []; // holds lables for all time charts (day of month)
+  let todayLabels = []; // holds lables for today charts
+    // holds data for charts 
   let durationArr = [];
   let focusArr = [];
   let focusAndworkArr = [];
   let justTodayFocusAndworkArr = [];
-  let todayLabels = [];
-
+  
+    // useState that sets vars to objects with all the data a chart needs  
   const [workData, setWorkData] = useState({
     labels: labelsArr,
     datasets: [{
@@ -57,28 +59,24 @@ const DisplayData = () => {
   });
   
 
-
+    //load data into arrays 
   const getWork = async () => {
     try{
       const q = query( collection(db, "productivityData"), where("userID", "==", userID), orderBy("startWorkTime"));
       const querySnapshot = await getDocs(q);
       querySnapshot.forEach((doc) => {
+          // for today charts 
         let today = new Date();
-        
         if((doc.data().startWorkTime.toDate().toString().substring(0,8) == today.toString().substring(0,8))){
           justTodayFocusAndworkArr.push(durationArr[durationArr.length - 1] * focusArr[focusArr.length - 1]);
           let ST = new Date(doc.data().startWorkTime.seconds*1000);
           todayLabels.push(ST.getHours() + ":"+  ST.getMinutes());
         }
-        
+          //for all time charts 
         durationArr.push(doc.data().duration);
         labelsArr.push(new Date(doc.data().startWorkTime.seconds*1000).getDate());
         focusArr.push(doc.data().productivity);
         focusAndworkArr.push(durationArr[durationArr.length - 1] * focusArr[focusArr.length - 1]);
-        
-        
-        
-        
       });
       setWorkSession(querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id})));
       console.log(durationArr);
@@ -90,6 +88,7 @@ const DisplayData = () => {
     
   };
   
+    // fetch the data from fierbase and call getWork() from above 
   const fetchUserID = async () => {
     
     try {
@@ -109,6 +108,7 @@ const DisplayData = () => {
     fetchRes = <p> Their was an error getting your data you may not be signd in or you internet conection may not be working </p>;
   }
 
+    // on page load call fetchUserID and set work data 
   useEffect( ()=> {
     fetchUserID();
     setWorkData({
