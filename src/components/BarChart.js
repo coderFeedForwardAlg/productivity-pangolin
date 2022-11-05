@@ -20,7 +20,7 @@ const BarChart = ({chartData}) => {
                   x: {
                     title: {
                       display: true,
-                      text: "day of the month",
+                      text: "",
                     }
                   },
                 }

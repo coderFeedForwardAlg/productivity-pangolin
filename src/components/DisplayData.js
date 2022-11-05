@@ -22,6 +22,8 @@ const DisplayData = () => {
   let focusArr = [];
   let focusAndworkArr = [];
   let justTodayFocusAndworkArr = [];
+  let todayDurationArr = [];
+  let todayFocusArr = [];
   
     // useState that sets vars to objects with all the data a chart needs  
   const [workData, setWorkData] = useState({
@@ -53,7 +55,25 @@ const DisplayData = () => {
     labels: labelsArr,
     datasets: [{
       label: "focus data",
+      data: justTodayFocusAndworkArr,
+      backgroundColor: ["purple"],
+    }]
+  });
+
+  const [todayDurationData, setTodayDurationData] = useState({
+    labels: labelsArr,
+    datasets: [{
+      label: "focus data",
       data: durationArr,
+      backgroundColor: ["purple"],
+    }]
+  });
+
+  const [todayFocusData, setTodayFocusData] = useState({
+    labels: labelsArr,
+    datasets: [{
+      label: "focus data",
+      data: todayFocusArr,
       backgroundColor: ["purple"],
     }]
   });
@@ -68,15 +88,18 @@ const DisplayData = () => {
           // for today charts 
         let today = new Date();
         if((doc.data().startWorkTime.toDate().toString().substring(0,8) == today.toString().substring(0,8))){
-          justTodayFocusAndworkArr.push(durationArr[durationArr.length - 1] * focusArr[focusArr.length - 1]);
+          justTodayFocusAndworkArr.push(doc.data().duration * doc.data().productivity);
+          todayFocusArr.push(doc.data().productivity);
+          todayDurationArr.push(doc.data().duration);
           let ST = new Date(doc.data().startWorkTime.seconds*1000);
           todayLabels.push(ST.getHours() + ":"+  ST.getMinutes());
+
         }
           //for all time charts 
         durationArr.push(doc.data().duration);
         labelsArr.push(new Date(doc.data().startWorkTime.seconds*1000).getDate());
         focusArr.push(doc.data().productivity);
-        focusAndworkArr.push(durationArr[durationArr.length - 1] * focusArr[focusArr.length - 1]);
+        focusAndworkArr.push(doc.data().duration * doc.data().productivity);
       });
       setWorkSession(querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id})));
       console.log(durationArr);
@@ -149,8 +172,30 @@ const DisplayData = () => {
       labels: todayLabels,
       datasets: [
       {
-        label: "todays focus times work",
+        label: "focus times work",
         data: justTodayFocusAndworkArr,
+        backgroundColor: ["purple"],
+      }
+    ]
+    });
+
+    setTodayDurationData({
+      labels: todayLabels,
+      datasets: [
+      {
+        label: "time working",
+        data: todayDurationArr,
+        backgroundColor: ["purple"],
+      }
+    ]
+    });
+
+    setTodayFocusData({
+      labels: todayLabels,
+      datasets: [
+      {
+        label: "focus (out of 10)",
+        data: todayFocusArr,
         backgroundColor: ["purple"],
       }
     ]
@@ -177,9 +222,17 @@ function predict(x) {
     return ( 
         <div className='display-data'>
           {fetchRes}
+          <h4>time working times focus, over time of day</h4>
           <BarChart chartData={justTodayFocusAndworkData} />
+          <h4>time working, over time of day</h4>
+          <BarChart chartData={todayDurationData} />
+          <h4>focus, over time of day</h4>
+          <BarChart chartData={todayFocusData} />
+          <h4>time working times focus, over the day of the month</h4>
           <BarChart chartData={focusAndWorkData}  />
+          <h4>time working, over the day of the month</h4>
           <BarChart chartData={workData} />
+          <h4>focus, over the day of the month</h4>
           <BarChart chartData={focusData} />
           
           {/*workSession.map( (duration) => {return <div> how long you worked: {duration.duration} </div>}) */}
