@@ -25,11 +25,11 @@ const Timer = () => {
     }
 
     let timePaused = 0; 
-
     let interval = null; 
     interval = setInterval(()=>{
         let now = new Date().getTime();
-        let distance = (countDownTime - now);
+            // time to go untill timer will stop 
+        let distance = countDownTime - now;
         let seconds = Math.floor((distance) / 1000);
         if(!paused){
             setTime(seconds);
@@ -60,7 +60,7 @@ const Timer = () => {
         const  now = new Date().getTime();
         const distance = (countDownTime - now);
         const seconds = Math.floor((distance) / 1000);
-        const timeDone = (id * 60 - seconds) / 60;
+        const timeDone = ( id * 60 - seconds) / 60;
         history.push(`/goodWork/${timeDone}`);
     } 
     const dontEndTimer = () => {
@@ -88,7 +88,6 @@ const pause = () => {
         console.log(paused);
     }
    }
-
 
     return ( 
         <div className="timer">

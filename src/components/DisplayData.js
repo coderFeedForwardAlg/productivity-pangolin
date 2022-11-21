@@ -87,7 +87,9 @@ const DisplayData = () => {
       querySnapshot.forEach((doc) => {
           // for today charts 
         let today = new Date();
-        if((doc.data().startWorkTime.toDate().toString().substring(0,8) == today.toString().substring(0,8))){
+        console.log(today);
+        console.log(doc.data().startWorkTime.toDate());
+        if(doc.data().startWorkTime.toDate().getDate() == today.getDate() && doc.data().startWorkTime.toDate().getMonth() == today.getMonth() ){
           justTodayFocusAndworkArr.push(doc.data().duration * doc.data().productivity);
           todayFocusArr.push(doc.data().productivity);
           todayDurationArr.push(doc.data().duration);
