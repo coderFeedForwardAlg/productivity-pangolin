@@ -4,13 +4,15 @@ import {db, auth} from '../firebase-config'
 import { useAuthState } from "react-firebase-hooks/auth";
 import { collection, addDoc, query, getDocs, where } from "firebase/firestore";
 import { useState } from "react";
-
+import { css } from '@emotion/css'
+import { useSelector } from "react-redux";
+import {Button2} from './styles/Button';
 
 const GoodWork = () => {
     const { time } = useParams();
     const history = useHistory();
     const [focus, setFocus] = useState(0);
-  
+    const color = useSelector((state) => state.color.value);
 
     
     const [user] = useAuthState(auth);
@@ -56,7 +58,13 @@ const GoodWork = () => {
 
     
     return ( 
-        <div className="goodWork">
+        <div className={css`
+            text-align: center;
+            font-size: large;
+            background: linear-gradient(to left, ${color[1]}  0%,  ${color[2]} 100%);
+            background-size: cover;
+            height: 100vh;
+        `}>
             <h1>Good Work</h1>
             {<form>
                 <label id="new-work-lable"><h2>How focused were you out of 10?</h2></label>
@@ -67,9 +75,11 @@ const GoodWork = () => {
                 <br />
                 
             </form> }
-            <button className="breakBut" onClick={start}>
+            <Button2 className={css`
+                background-color: ${color[0]}
+            `} onClick={start}>
                 Take a Break
-            </button>
+            </Button2>
         </div>
      );
 }

@@ -204,21 +204,32 @@ const DisplayData = () => {
     });
 
   },[userID, user]);
-
+/*
 // ML modle 
-const a = tf.variable(tf.scalar(Math.random()));
-const b = tf.variable(tf.scalar(Math.random()));
-const c = tf.variable(tf.scalar(Math.random()));
-const d = tf.variable(tf.scalar(Math.random()));
-function predict(x) {
-  // y = a * x ^ 3 + b * x ^ 2 + c * x + d
-  return tf.tidy(() => {
-    return a.mul(x.pow(tf.scalar(3))) // a * x^3
-      .add(b.mul(x.square())) // + b * x ^ 2
-      .add(c.mul(x)) // + c * x
-      .add(d); // + d
+async function run() {
+  // Load and plot the original input data that we are going to train on.
+  
+  const values = ({
+    x: durationArr,
+    y: focusArr,
   });
+
+  tfvis.render.scatterplot(
+    {name: 'Horsepower v MPG'},
+    {values},
+    {
+      xLabel: 'Horsepower',
+      yLabel: 'MPG',
+      height: 300
+    }
+  );
+
+  // More code will be added below
 }
+
+document.addEventListener('DOMContentLoaded', run);
+*/
+
 
 
     return ( 

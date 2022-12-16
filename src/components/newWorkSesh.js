@@ -7,12 +7,16 @@ import pangolinPic from './imgs/pangolinImg.png';
 import StudyMusic from "./StudyMusic";
 import { auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
-
+import {Background} from './styles/Background';
+import { css } from '@emotion/css'
+import { useSelector } from "react-redux";
+import {Button2} from './styles/Button';
 
 const NewWorkSesh = () => {
     const [user] = useAuthState(auth);
     const [notLogIn, setNotLogIn] = useState(<div> </div>)
     const [time, setTime] = useState(25);
+    const color = useSelector((state) => state.color.value);
     
     const history = useHistory();
 
@@ -52,7 +56,13 @@ const NewWorkSesh = () => {
     }
         //TODO: fix stile of pic 
     return ( 
-        <div className="new-work-sesh">
+        <div className={css`
+            text-align: center;
+            padding-top: 10%;
+            background: linear-gradient(to left, ${color[1]}  0%, ${color[2]} 100%);
+            background-size: cover;
+            height: 100vh;
+        `}>
             <img src = {pangolinPic} style={{ width: '400px', float: "left"}}/>
             <form>
                 <label id="new-work-lable"><h2>How Long Do You Want To Work</h2></label>
@@ -64,7 +74,10 @@ const NewWorkSesh = () => {
                 
             </form>
             {notLogIn}
-            <button className="startBut" onClick={start}>Start</button>
+                {/* TODO: make button 1 (start button)  */}
+            <Button2 className={css`
+                background-color: ${color[0]}; 
+            `} onClick={start}>Start</Button2>
             {/* <StudyMusic /> */}
             
         </div>

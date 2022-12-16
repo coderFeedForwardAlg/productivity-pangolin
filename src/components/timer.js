@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useHistory, useParams } from 'react-router-dom';
+import {Button2} from './styles/Button';
 import sound from './sound/mixkit-attention-bell-ding-586.wav';
+import { css } from '@emotion/css';
+import { useSelector } from "react-redux";
 
 
 const Timer = () => {
@@ -14,6 +17,7 @@ const Timer = () => {
    const audio = new Audio(sound);
    audio.muted = true;
    audio.play();  // so the sound will play in bachground tab 
+   const color = useSelector((state) => state.color.value);
 
     const displayTime = ()=>{
         let min = Math.floor(time / 60);
@@ -47,17 +51,34 @@ const Timer = () => {
     const [wantEndCard, setWantEndCard] = useState(<div> </div>);
 
     const wantToEndTimer = () => {
-        setWantEndCard(<div className="card"> 
+        setWantEndCard(<div className={css`
+            font-size: 20px;
+            padding: 3%;
+            background-color: ${color[1]};
+            border: #000000;
+            width: max-content;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: rotateX(0deg) translate(-50%, -50%);
+            border-radius: 10%;
+            border-style: solid;
+        `}> 
             Do you want to end? 
             <br />  
-            <button className="pauseButton" onClick={endTimer}> End Timer</button>
+            <Button2 className={css`
+                background-color: ${color[0]}; 
+            `} onClick={endTimer}> End Timer</Button2>
             <br />
-            <button className="pauseButton" onClick={dontEndTimer}> Don't End Timer</button>
+            <Button2 className={css`
+                    background-color: ${color[0]}; 
+            `} onClick={dontEndTimer}> Don't End Timer</Button2>
         </div>) 
     }
 
     const endTimer = () => {
         const  now = new Date().getTime();
+        //TODO: bug, if now is much later because timer is poused 
         const distance = (countDownTime - now);
         const seconds = Math.floor((distance) / 1000);
         const timeDone = ( id * 60 - seconds) / 60;
@@ -78,7 +99,12 @@ const pause = () => {
     }
     if(paused){
         const unPause = new Date().getTime();
-        timePaused = unPause - startPauseTime; 
+            //TODO: bug is still their (time still recorded when paused and then ended)
+        if(paused){
+            timePaused = unPause - startPauseTime;
+        }else{
+            timePaused = unPause - startPauseTime; 
+        }
         console.log(startPauseTime / 1000);
         console.log(unPause / 1000);
         console.log(timePaused / 1000);
@@ -88,17 +114,32 @@ const pause = () => {
         console.log(paused);
     }
    }
-
+   
+    
+   
     return ( 
-        <div className="timer">
+        <div className={css`
+            background: linear-gradient(to left,${color[1]}  0%,  ${color[2]}  100%);
+            text-align: center;
+            font-size: 200px; 
+            width: 100%;
+            background-size: cover;
+            height: 100vh;
+        `}>
             <h3 className='timer-text'>Study Time!</h3>
             {displayTime()}
             <br/>
             {wantEndCard}
-            <button className='pauseButton' onClick={pause}>
+            <Button2 className={css`
+                background-color: ${color[0]};    
+            `}  onClick={pause}>
                 {pauseText}
-            </button>
-            <button className="pauseButton" onClick={wantToEndTimer}> End Timer</button>
+            </Button2>
+            <Button2 className={css`
+                background-color: ${color[0]};    
+            `} onClick={wantToEndTimer}> End Timer</Button2>
+            
+
         </div>
      );
 }

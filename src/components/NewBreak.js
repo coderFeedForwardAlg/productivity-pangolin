@@ -1,10 +1,14 @@
 import { useState } from "react";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
+import { Button2 } from "./styles/Button";
+import { css } from '@emotion/css';
+import { useSelector } from "react-redux";
 
 const NewBreak = () => {
     const [time, setTime] = useState(5);
-    
+    const color = useSelector((state) => state.color.value);
+
     const history = useHistory();
 
     const start = ()=>{
@@ -21,7 +25,13 @@ const NewBreak = () => {
     }
 
     return ( 
-        <div className="new-break">
+        <div className={css`
+            background: linear-gradient(to left, ${color[1]}  0%,  ${color[2]} 100%);
+            background-size: cover;
+            height: 100vh;
+            text-align: center;
+            font-size: large;
+        `}>
             <form>
                 <h2>How Long Do You Want to Take a Break</h2>
                 <input placeholder="5" onChange={(e)=>{
@@ -31,7 +41,7 @@ const NewBreak = () => {
                 <error>{errors.duration?.type === "pattern" && "please only enter numbers"}</error> */}
                 
             </form>
-            <button className="startBut" onClick={start}>Start</button>
+            <Button2 className={css`background-color: ${color[1]}`} onClick={start}>Start</Button2>
         </div>
      );
 }

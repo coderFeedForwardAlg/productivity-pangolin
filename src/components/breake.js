@@ -1,6 +1,9 @@
 import { useHistory, useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import sound from './sound/mixkit-attention-bell-ding-586.wav';
+import { Button2 } from "./styles/Button";
+import { css } from '@emotion/css';
+import { useSelector } from "react-redux";
 
 const Break = () => {
     const { timeparam } = useParams();
@@ -8,6 +11,7 @@ const Break = () => {
     const [countDownTime, setCountDownTime] = useState(new Date().getTime() + time * 1000);
     const history = useHistory();
     const audio = new Audio(sound);
+    const color = useSelector((state) => state.color.value);
 
     useEffect(()=>{
         const interval = setInterval(()=>{
@@ -32,7 +36,14 @@ const Break = () => {
         return `${min}:${sec}`; 
     }
     return ( 
-        <div className="timer">
+        <div className={css`
+            background: linear-gradient(to left, ${color[1]}  0%,  ${color[2]} 100%);
+            text-align: center;
+            font-size: 200px; 
+            width: 100%;
+            background-size: cover;
+            height: 100vh;
+        `}>
             <h3 className='timer-text'>Break Time!</h3>
             {displayTime()}
         </div>
