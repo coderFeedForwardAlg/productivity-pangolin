@@ -5,6 +5,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { db, auth } from '../firebase-config'
 import { collection, query, where, getDocs, orderBy } from 'firebase/firestore'
 import BarChart from './BarChart';
+import { useSelector } from "react-redux";
 import * as tf from '@tensorflow/tfjs';
 
 
@@ -13,6 +14,8 @@ const DisplayData = () => {
   const userCollection = collection(db, "productivityData");
   const [user] = useAuthState(auth);
   const [userID, setUserID] = useState("");
+  const color = useSelector((state) => state.color.value);
+  
 
 
   let labelsArr = []; // holds lables for all time charts (day of month)
@@ -31,7 +34,7 @@ const DisplayData = () => {
     datasets: [{
       label: "work data",
       data: durationArr,
-      backgroundColor: ["purple"],
+      backgroundColor: color[1],
     }]
   });
   const [focusData, setfocusData] = useState({
@@ -39,7 +42,7 @@ const DisplayData = () => {
     datasets: [{
       label: "focus data",
       data: durationArr,
-      backgroundColor: ["purple"],
+      backgroundColor: color[1],
     }]
   });
   const [focusAndWorkData, setfocusAndWorkData] = useState({
@@ -47,7 +50,7 @@ const DisplayData = () => {
     datasets: [{
       label: "focus data",
       data: durationArr,
-      backgroundColor: ["purple"],
+      backgroundColor: color[1],
     }]
   });
 
@@ -56,7 +59,7 @@ const DisplayData = () => {
     datasets: [{
       label: "focus data",
       data: justTodayFocusAndworkArr,
-      backgroundColor: ["purple"],
+      backgroundColor: color[1],
     }]
   });
 
@@ -65,7 +68,7 @@ const DisplayData = () => {
     datasets: [{
       label: "focus data",
       data: durationArr,
-      backgroundColor: ["purple"],
+      backgroundColor: color[1],
     }]
   });
 
@@ -74,7 +77,7 @@ const DisplayData = () => {
     datasets: [{
       label: "focus data",
       data: todayFocusArr,
-      backgroundColor: ["purple"],
+      backgroundColor: color[1],
     }]
   });
   
@@ -142,7 +145,7 @@ const DisplayData = () => {
       {
         label: "time working",
         data: durationArr,
-        backgroundColor: ["purple"],
+        backgroundColor: color[1],
       }
     ]
     });
@@ -153,7 +156,7 @@ const DisplayData = () => {
       {
         label: "focus from 1 to 10",
         data: focusArr,
-        backgroundColor: ["purple"],
+        backgroundColor: color[1],
       }
     ]
     });
@@ -164,7 +167,7 @@ const DisplayData = () => {
       {
         label: "focus times work",
         data: focusAndworkArr,
-        backgroundColor: ["purple"],
+        backgroundColor: color[1],
       }
     ]
     });
@@ -176,7 +179,7 @@ const DisplayData = () => {
       {
         label: "focus times work",
         data: justTodayFocusAndworkArr,
-        backgroundColor: ["purple"],
+        backgroundColor: color[1],
       }
     ]
     });
@@ -187,7 +190,7 @@ const DisplayData = () => {
       {
         label: "time working",
         data: todayDurationArr,
-        backgroundColor: ["purple"],
+        backgroundColor: color[1],
       }
     ]
     });
@@ -198,7 +201,7 @@ const DisplayData = () => {
       {
         label: "focus (out of 10)",
         data: todayFocusArr,
-        backgroundColor: ["purple"],
+        backgroundColor: color[1],
       }
     ]
     });

@@ -41,7 +41,7 @@ const NewBreak = () => {
                 <error>{errors.duration?.type === "pattern" && "please only enter numbers"}</error> */}
                 
             </form>
-            <Button2 className={css`background-color: ${color[1]}`} onClick={start}>Start</Button2>
+            <Button2 className={css`background-color: ${color[0]}`} onClick={start}>Start</Button2>
         </div>
      );
 }

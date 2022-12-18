@@ -1,6 +1,16 @@
+import { Button2 } from "./styles/Button";
+import { css } from '@emotion/css';
+import { useSelector } from "react-redux";
+
 const Landing = () => {
+    const color = useSelector((state) => state.color.value);
     return ( 
-        <div className="landing-page">
+        <div className={css`
+            padding: 30px;
+            background: linear-gradient(to left,${color[1]}  0%,  ${color[2]} 100%);
+            background-size: cover;
+            height: 100vh;
+        `}>
             <h1>
                 Welcome to Productivity Pangolin. 
             </h1>

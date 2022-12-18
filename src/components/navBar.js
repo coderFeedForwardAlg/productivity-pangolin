@@ -35,7 +35,7 @@ const NavBar = () => {
                 <li><Link to="/work" className='brandLink'><h1>Work</h1> </Link> </li>
                 <li><Link to={link} className='brandLink'><h1>{title}</h1> </Link> </li>
                 <li><Link to="/display" className='brandLink'><h1>Data</h1> </Link></li> 
-                <li><Link  className='brandLink' ><h1 onClick={() => dispatch(setColor())}> switch theame </h1> </Link></li>
+                <li><Link  className='brandLink' ><h1 onClick={() => dispatch(setColor())}> switch theme </h1> </Link></li>
                 
             </ul>
         </nav>
