@@ -63,6 +63,7 @@ const NewWorkSesh = () => {
             background-size: cover;
             height: 100vh;
         `}>
+                
             <img src = {pangolinPic} style={{ width: '400px', float: "left"}}/>
             <form>
                 <label id="new-work-lable"><h2>How Long Do You Want To Work</h2></label>

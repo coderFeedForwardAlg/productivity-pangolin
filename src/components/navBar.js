@@ -3,7 +3,7 @@ import { auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
     // for redux 
 import { useDispatch, useSelector } from "react-redux";
-import { setColor} from "../redux/color";
+import { setColor, setColor2} from "../redux/color";
 
 import { css } from '@emotion/css'
 import styled from '@emotion/styled'
@@ -35,7 +35,8 @@ const NavBar = () => {
                 <li><Link to="/work" className='brandLink'><h1>Work</h1> </Link> </li>
                 <li><Link to={link} className='brandLink'><h1>{title}</h1> </Link> </li>
                 <li><Link to="/display" className='brandLink'><h1>Data</h1> </Link></li> 
-                <li><Link  className='brandLink' ><h1 onClick={() => dispatch(setColor())}> switch theme </h1> </Link></li>
+                <li><Link  className='brandLink' ><h1 onClick={() => dispatch(setColor())}> purple theme </h1> </Link></li>
+                <li><Link  className='brandLink' ><h1 onClick={() => dispatch(setColor2())}> green theme</h1> </Link></li>
                 
             </ul>
         </nav>

@@ -12,16 +12,20 @@ const initialState = {
     reducers: {
       setColor: (state) => {
           // this may cous problems later!
-        if(state.value[0] == "blueviolet"){
-            state.value = arr2;
-        }else{
-            state.value = arr;
-        }
+        // if(state.value[0] == "blueviolet"){
+        //     state.value = arr2;
+        // }else{
+        //     state.value = arr;
+        // }
+        state.value = arr; 
         
+      },
+      setColor2: (state) => {
+        state.value = arr2; 
       }
     },
   })
 
-  export const { setColor } = colorSlice.actions
+  export const { setColor, setColor2 } = colorSlice.actions
 
 export default colorSlice.reducer
