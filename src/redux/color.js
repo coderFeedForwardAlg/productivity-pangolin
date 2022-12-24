@@ -1,31 +1,28 @@
-import { createSlice } from '@reduxjs/toolkit'
-// button color, background right, background left, nav 
-const arr = ["blueviolet", "#8110a0","#3beefe", "#A23ACA"]; 
-const arr2 = ["#663300", "#003300","#009900", "#004d00"]
+import { createSlice } from '@reduxjs/toolkit';
+  // button color, background right, background left, nav 
+const purpleArr = ["blueviolet", "#8110a0", "#3beefe", "#A23ACA"]; 
+const greenArr = ["#663300", "#003300", "#009900", "#004d00"];
+
+
+
+
 const initialState = {
-    value: arr,
-  }
+  value: purpleArr,
+}
 
-  export const colorSlice = createSlice({
-    name: 'color',
-    initialState,
-    reducers: {
-      setColor: (state) => {
-          // this may cous problems later!
-        // if(state.value[0] == "blueviolet"){
-        //     state.value = arr2;
-        // }else{
-        //     state.value = arr;
-        // }
-        state.value = arr; 
-        
-      },
-      setColor2: (state) => {
-        state.value = arr2; 
-      }
+export const colorSlice = createSlice({
+  name: 'color',
+  initialState,
+  reducers: {
+    setColorPurple: (state) => {
+      state.value = purpleArr; 
     },
-  })
+    setColorGreen: (state) => {
+      state.value = greenArr; 
+    }
+  },
+})
 
-  export const { setColor, setColor2 } = colorSlice.actions
+  export const { setColorPurple, setColorGreen } = colorSlice.actions
 
 export default colorSlice.reducer
