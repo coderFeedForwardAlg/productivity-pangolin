@@ -12,6 +12,7 @@ import Reset from './components/reset';
 import Dashboard from './components/dashboard';
 import Logout from './components/Logout';
 import NewBreak from './components/NewBreak';
+import Settings from './components/Settings';
 
 
 
@@ -76,6 +77,10 @@ function App() {
 
             <Route  path="/new/break">
               <NewBreak/>
+            </Route>
+
+            <Route  path="/settings">
+              <Settings/>
             </Route>
 
 

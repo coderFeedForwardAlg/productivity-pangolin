@@ -4,10 +4,15 @@ const purpleArr = ["blueviolet", "#8110a0", "#3beefe", "#A23ACA"];
 const greenArr = ["#663300", "#003300", "#009900", "#004d00"];
 
 
-
-
-const initialState = {
-  value: purpleArr,
+let initialState;
+if(localStorage.getItem("color") == "green"){
+  initialState = {
+    value: greenArr,
+  }
+}else{
+  initialState = {
+    value: purpleArr,
+  }
 }
 
 export const colorSlice = createSlice({

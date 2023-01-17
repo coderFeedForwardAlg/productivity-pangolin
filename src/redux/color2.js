@@ -1,7 +1,14 @@
 import { createSlice } from '@reduxjs/toolkit'
-const initialState = {
+if(localStorage.getItem("color") == "purple"){
+  const initialState = {
     value: "blueviolet",
   }
+}
+if(localStorage.getItem("color") == "green"){
+  const initleState = {
+    value: "green"
+  }
+}
 
   export const color2Slice = createSlice({
     name: 'color2',
