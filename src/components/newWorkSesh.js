@@ -8,7 +8,7 @@ import StudyMusic from "./StudyMusic";
 import { auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {Background} from './styles/Background';
-import { css } from '@emotion/css'
+import { css } from '@emotion/css';
 import { useSelector } from "react-redux";
 import {Button2} from './styles/Button';
 
@@ -19,17 +19,10 @@ const NewWorkSesh = () => {
     const color = useSelector((state) => state.color.value);
     
     const history = useHistory();
-
-    
-        // for when user hits enter insted of using button 
-        // TODO: this uses deprecated code 
-      document.onkeydown = function(e){
-        e = e || window.event;
-        let key = e.which || e.keyCode;
-        if(key===13){
-            start();
-        }
-    }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        start();
+      }
 
     const start = ()=>{
         // if user them card 
@@ -37,7 +30,19 @@ const NewWorkSesh = () => {
             history.push(`/timer/${time}`);
         }else{
             setNotLogIn(
-                <div className="card"> 
+                <div className= {css`
+                    font-size: 20px;
+                    padding: 3%;
+                    background-color: ${color[1]};
+                    border: #000000;
+                    width: max-content;
+                    position: fixed;
+                    left: 50%;
+                    top: 50%;
+                    transform: rotateX(0deg) translate(-50%, -50%);
+                    border-radius: 10%;
+                    border-style: solid;
+                `}> 
                      You are not loged in <br /> do you want to continue without saving your work?
                     <br />  
                     <button className="pauseButton" onClick={logIn}> Log In</button>
@@ -62,23 +67,43 @@ const NewWorkSesh = () => {
             background: linear-gradient(to left, ${color[1]}  0%, ${color[2]} 100%);
             background-size: cover;
             height: 100vh;
+            
         `}>
+            <div className={css`
+                margin-left:10%;
+                @media (max-width: 420px) {
+                    display: grid;
+                    grid-template-rows: 45%; 
+                }
+            `}>
+                <img src = {pangolinPic} className={css`
+                    width: 400px;
+                    float: left;
+                    @media (max-width: 420px) {
+                        float: right; 
+                        width: 200px;
+                        margin-bottom: 30%;
+
+                    }
+                `} />
+                <form onSubmit={handleSubmit}>
+                    <label id="new-work-lable"><h2>How Long Do You Want To Work</h2></label>
+                    <input placeholder="25" onChange={(e)=>{
+                        setTime(e.target.value);
+                    }}/>
+                    {/*<error>{ errors.duration?.type === "required" && "please enter a value"}</error>
+                    <error>{errors.duration?.type === "pattern" && "please only enter numbers"}</error> */}
+                 </form>
+                 <Button2 className={css`
+                        background-color: ${color[0]}; 
+                 `} onClick={start}>Start</Button2>
+            </div>
                 
-            <img src = {pangolinPic} style={{ width: '400px', float: "left"}}/>
-            <form>
-                <label id="new-work-lable"><h2>How Long Do You Want To Work</h2></label>
-                <input placeholder="25" onChange={(e)=>{
-                    setTime(e.target.value);
-                }}/>
-                {/*<error>{ errors.duration?.type === "required" && "please enter a value"}</error>
-                <error>{errors.duration?.type === "pattern" && "please only enter numbers"}</error> */}
-                
-            </form>
+            
+            
             {notLogIn}
                 {/* TODO: make button 1 (start button)  */}
-            <Button2 className={css`
-                background-color: ${color[0]}; 
-            `} onClick={start}>Start</Button2>
+            
             {/* <StudyMusic /> */}
             
         </div>

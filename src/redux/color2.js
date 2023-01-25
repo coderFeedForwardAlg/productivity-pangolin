@@ -9,6 +9,11 @@ if(localStorage.getItem("color") == "green"){
     value: "green"
   }
 }
+if(localStorage.getItem("color") == "pink"){
+  const initleState = {
+    value: "pink"
+  }
+}
 
   export const color2Slice = createSlice({
     name: 'color2',

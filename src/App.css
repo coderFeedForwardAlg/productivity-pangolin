@@ -11,12 +11,6 @@ E7DFDD
     font-family: Arial, sans-serif;
   }
 
-  .longin{
-    background: linear-gradient(to left,#8110a0  0%,  #3beefe 100%);
-    background-size: cover;
-    height: 100vh;
-  }
-
 .timer{
     background: linear-gradient(to left,#8110a0  0%,  #3beefe 100%);
     text-align: center;
@@ -167,23 +161,6 @@ li {
 
 
 
-
-
-  .card{
-    font-size: 20px;
-    padding: 3%;
-    background-color: #A239CA;
-    border: #000000;
-    width: max-content;
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    transform: rotateX(0deg) translate(-50%, -50%);
-    border-radius: 10%;
-    border-style: solid;
-    /*animation-name: open-card;
-    animation-duration: 1s; ****** animation did not work like I thought ********/ 
-  }
 
   @keyframes open-card {
     from {transform: rotateX(90deg) translate(-50%, -50%);}

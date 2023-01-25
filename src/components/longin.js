@@ -3,13 +3,17 @@ import React, {useEffect, useState} from "react";
 import { Link, useHistory} from "react-router-dom"; // not sure that useNavigat is nessisary 
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase-config";
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { css } from '@emotion/css';
+import { useSelector } from "react-redux";
 import "../login.css";
+
 
 const Longin = () => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [user, loading, error] = useAuthState(auth);
-    const history = useHistory(); // ? 
+    const color = useSelector((state) => state.color.value);
+    const history = useHistory();
     useEffect(() => {
         if (loading){
                 // TODO: trigger loading screen 
@@ -19,7 +23,11 @@ const Longin = () => {
     }, [user,loading]);
 
     return ( 
-        <div className="longin">
+        <div className={css`
+            background: linear-gradient(to left,${color[1]}  0%,  ${color[2]} 100%);
+            background-size: cover;
+            height: 100vh;
+        `}>
             <div className="login-container">
                 <input
                     type="text"
