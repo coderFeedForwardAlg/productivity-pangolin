@@ -13,7 +13,7 @@ const Landing = () => {
         `}>
             <h1>
                 Welcome to Productivity Pangolin. 
-            </h1>
+            </h1> 
             <br/>
             <h3>
                 This is a great place to make sure you are working hard and taking breaks! 

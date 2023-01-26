@@ -15,14 +15,12 @@ const NewBreak = () => {
         history.push(`/break/${time}`);
     }
 
-        // for when user hits enter key insted of start button 
-    document.onkeydown = function(e){
-        e = e || window.event;
-        let key = e.which || e.keyCode;
-        if(key===13){
-            start();
-        }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        start();
     }
+
+
 
     return ( 
         <div className={css`
@@ -32,7 +30,7 @@ const NewBreak = () => {
             text-align: center;
             font-size: large;
         `}>
-            <form>
+            <form onSubmit={handleSubmit}>
                 <h2>How Long Do You Want to Take a Break</h2>
                 <input placeholder="5" onChange={(e)=>{
                     setTime(e.target.value);
