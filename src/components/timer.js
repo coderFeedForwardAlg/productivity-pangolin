@@ -125,6 +125,9 @@ const pause = () => {
             width: 100%;
             background-size: cover;
             height: 100vh;
+            @media (max-width: 420px){
+                font-size: 50px; 
+            }
         `}>
             <h3 className='timer-text'>Study Time!</h3>
             {displayTime()}

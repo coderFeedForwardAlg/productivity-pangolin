@@ -9,8 +9,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import {useSelector} from "react-redux";
 
 
-import { css } from '@emotion/css';
-import { Button2 } from './styles/Button';
+import { css, keyframes} from '@emotion/css';
  
 const NavBar = () => {
     const [user] = useAuthState(auth);
@@ -34,25 +33,32 @@ const NavBar = () => {
         // for redux
     const color  = useSelector((state) => state.color.value);
     
+    const move = keyframes`
+        from {
+            transform: translateY(-100%);
+        }
+        to {
+            transform: translateY(0);
+        }
+    `
 
     
     return (
         <nav className="nav-bar">
             
-            <Button2 className={css`
+            <ul className={css`
 
                 display: none;
                 background-color: ${color[3]};
                 position: fixed;
-                top: -20;
-                left: -20;
                 padding: 0%;
                 margin-top: 0%;
+                font-size: 25px;
                 @media(max-width: 420px){
                     display: block;
                 }
                     
-            `} onClick={menu}>Menu</Button2>
+            `} onClick={menu}>Menu</ul>
             <ul className={css`
                 list-style-type: none;
                 margin: 0;
@@ -62,6 +68,7 @@ const NavBar = () => {
                 @media (max-width: 420px){
                     display: ${visible};
                     grid-template-columns: 45%;
+                    animation: ${move} 1s;
                 }
                 
             `}>
