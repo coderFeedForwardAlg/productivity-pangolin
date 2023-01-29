@@ -29,6 +29,7 @@ const NewBreak = () => {
             height: 100vh;
             text-align: center;
             font-size: large;
+            padding-top: 10%;
         `}>
             <form onSubmit={handleSubmit}>
                 <h2>How Long Do You Want to Take a Break</h2>

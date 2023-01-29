@@ -45,9 +45,9 @@ const NewWorkSesh = () => {
                 `}> 
                      You are not loged in <br /> do you want to continue without saving your work?
                     <br />  
-                    <button className="pauseButton" onClick={logIn}> Log In</button>
+                    <Button2 className={css`background-color: ${color[0]}; `} onClick={logIn}> Log In</Button2>
                     <br />
-                    <button className="pauseButton" onClick={startAnyway}> Continue</button>
+                    <Button2 className={css`background-color: ${color[0]}; `} onClick={startAnyway}> Continue</Button2>
                 </div>
             );
         }

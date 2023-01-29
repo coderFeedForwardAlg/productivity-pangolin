@@ -62,7 +62,7 @@ const NavBar = () => {
     
     
     return (
-        <nav className="nav-bar">
+        <nav>
             
             <ul className={css`
 
@@ -73,7 +73,7 @@ const NavBar = () => {
                 margin-top: 0%;
                 font-size: 25px;
                 z-index: 2;
-                @media(max-width: 420px){
+                @media(max-width: 720px){
                     display: block;
                 }
                     
@@ -86,11 +86,14 @@ const NavBar = () => {
                 padding: 10px;
                 list-style-type: none;
                 position: absolute;
-                width: 100%;
+                left: 0; 
+                right: 0;
+                    /* changed to vw to ajust for smaller screans
+                font-size: 1.4vw; */
                 background-color: ${color[3]};
                 
                 
-                @media (max-width: 420px){
+                @media (max-width: 720px){
                     width: 50%;
                     grid-template-columns: 45%;
                     display: ${visible}; 
@@ -110,20 +113,6 @@ const NavBar = () => {
             </ul>
 
             
-
-                {/* bad code here  */}
-            <ul className={css`
-                background-color: ${color[3]};
-                z-index: 3 
-                top:0px;
-                left: 0;
-                width: 100%;
-                hight: 50%
-                position: absolute;
-                
-            `}>
-                
-            </ul>
             
         </nav>
 

@@ -10,6 +10,7 @@ const Landing = () => {
             background: linear-gradient(to left,${color[1]}  0%,  ${color[2]} 100%);
             background-size: cover;
             height: 100vh;
+            padding-top: 10%;
         `}>
             <h1>
                 Welcome to Productivity Pangolin. 

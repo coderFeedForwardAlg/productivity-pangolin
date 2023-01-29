@@ -38,13 +38,14 @@ const Settings = () => {
             font-size: 200px; 
             width: 100%;
             background-size: cover;
-            height: 100vh;
+            height: 105vh;
             @media (max-width: 420px) {
                 font-size: 10px;
             }
         `}>
             <h3 className={css`
                 font-size: 40px;
+                padding-top: 10%;
                 @media (max-width: 420px){
                     font-size: 15px;
                     padding-top: 20%;

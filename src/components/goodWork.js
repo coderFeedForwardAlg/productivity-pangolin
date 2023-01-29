@@ -60,9 +60,11 @@ const GoodWork = () => {
             background-size: cover;
             height: 100vh;
         `}>
-            <h1>Good Work</h1>
+            <h1 className={css`
+                padding-top:10%;
+            `}>Good Work</h1>
             {<form onSubmit={handleSubmit}>
-                <label id="new-work-lable"><h2>How focused were you out of 10?</h2></label>
+                <label><h2>How focused were you out of 10?</h2></label>
                 <input placeholder="10" onChange={(e)=>{
                     setFocus(e.target.value);
                 }}

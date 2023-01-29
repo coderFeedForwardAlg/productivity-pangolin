@@ -5,6 +5,7 @@ import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase-c
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { css } from '@emotion/css';
 import { useSelector } from "react-redux";
+import { Button2 } from "./styles/Button";
 import "../login.css";
 
 
@@ -47,24 +48,24 @@ const Longin = () => {
                     }}
                     placeholder = "Password"
                 />
-                <button2
+                <Button2
                     className={css`
                         background-color: ${color[0]};
-                        padding: 10px
+
                     `}
                     onClick= { ()=> {
                         logInWithEmailAndPassword(email, password)
                     }}
                 >
                     Login
-                </button2>
+                </Button2>
                 {/*<button className="login-with-google" onClick={signInWithGoogle}>
                     Longin With Google
                 </button> */}
                 
-                <div>
+                {/* <div>
                     <Link to = "/reset">Forgot Password</Link> 
-                </div>
+                </div> */}
                 <div>
                     Don't have and account? <Link to="/register">Register </Link> now. 
                 </div>

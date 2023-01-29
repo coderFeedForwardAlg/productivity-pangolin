@@ -8,6 +8,7 @@ import { useSelector } from "react-redux";
 
 const Timer = () => {
    const { id } = useParams();
+        // how long the timer should run in seconts 
    const [time, setTime] = useState(id * 60);
    const history = useHistory();
    const [pauseText, setPauseText] = useState("Pause Timer");
@@ -129,7 +130,7 @@ const pause = () => {
                 font-size: 50px; 
             }
         `}>
-            <h3 className='timer-text'>Study Time!</h3>
+            <h3 className='timer-text'>Work Time!</h3>
             {displayTime()}
             <br/>
             {wantEndCard}
