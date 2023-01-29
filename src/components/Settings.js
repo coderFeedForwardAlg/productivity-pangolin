@@ -43,7 +43,13 @@ const Settings = () => {
                 font-size: 10px;
             }
         `}>
-            <h3 className='timer-text'>You can change the color theme!</h3>
+            <h3 className={css`
+                font-size: 40px;
+                @media (max-width: 420px){
+                    font-size: 15px;
+                    padding-top: 20%;
+                }
+            `}>You can change the color theme!</h3>
             <div className={css`
                 
                 display: grid;

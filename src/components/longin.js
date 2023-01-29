@@ -47,14 +47,17 @@ const Longin = () => {
                     }}
                     placeholder = "Password"
                 />
-                <button
-                    className="longin-btn"
+                <button2
+                    className={css`
+                        background-color: ${color[0]};
+                        padding: 10px
+                    `}
                     onClick= { ()=> {
                         logInWithEmailAndPassword(email, password)
                     }}
                 >
                     Login
-                </button>
+                </button2>
                 {/*<button className="login-with-google" onClick={signInWithGoogle}>
                     Longin With Google
                 </button> */}
