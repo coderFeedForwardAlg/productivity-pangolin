@@ -35,10 +35,10 @@ const Settings = () => {
         <div className={css`
             background: linear-gradient(to left, ${color[1]}  0%,  ${color[2]} 100%);
             text-align: center;
-            font-size: 200px; 
             width: 100%;
             background-size: cover;
-            height: 105vh;
+            min-height: 100vh;
+            height: max-content;
             @media (max-width: 420px) {
                 font-size: 10px;
             }
@@ -52,7 +52,6 @@ const Settings = () => {
                 }
             `}>You can change the color theme!</h3>
             <div className={css`
-                
                 display: grid;
                 grid-template-columns: 45%;
                 

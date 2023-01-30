@@ -12,7 +12,8 @@ border: #0E0B16;
 box-shadow: #000000;
 border-style: solid;
 margin: 30px;
-border-radius: 10%;
+padding: 10px;
+border-radius: 12px;
 &:hover{
     box-shadow: 5px 5px;
   }

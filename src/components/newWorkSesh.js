@@ -25,31 +25,35 @@ const NewWorkSesh = () => {
       }
 
     const start = ()=>{
-        // if user them card 
-        if(user){
-            history.push(`/timer/${time}`);
+        if (time.match(/[^0-9.]/)){
+            alert("can only use numbers in the study time field");
         }else{
-            setNotLogIn(
-                <div className= {css`
-                    font-size: 20px;
-                    padding: 3%;
-                    background-color: ${color[1]};
-                    border: #000000;
-                    width: max-content;
-                    position: fixed;
-                    left: 50%;
-                    top: 50%;
-                    transform: rotateX(0deg) translate(-50%, -50%);
-                    border-radius: 10%;
-                    border-style: solid;
-                `}> 
-                     You are not loged in <br /> do you want to continue without saving your work?
-                    <br />  
-                    <Button2 className={css`background-color: ${color[0]}; `} onClick={logIn}> Log In</Button2>
-                    <br />
-                    <Button2 className={css`background-color: ${color[0]}; `} onClick={startAnyway}> Continue</Button2>
-                </div>
-            );
+                // if user them card 
+            if(user){
+                history.push(`/timer/${time}`);
+            }else{
+                setNotLogIn(
+                    <div className= {css`
+                        font-size: 20px;
+                        padding: 3%;
+                        background-color: ${color[1]};
+                        border: #000000;
+                        width: max-content;
+                        position: fixed;
+                        left: 50%;
+                        top: 50%;
+                        transform: rotateX(0deg) translate(-50%, -50%);
+                        border-radius: 10%;
+                        border-style: solid;
+                    `}> 
+                        You are not loged in <br /> do you want to continue without saving your work?
+                        <br />  
+                        <Button2 className={css`background-color: ${color[0]}; `} onClick={logIn}> Log In</Button2>
+                        <br />
+                        <Button2 className={css`background-color: ${color[0]}; `} onClick={startAnyway}> Continue</Button2>
+                    </div>
+                );
+            }
         }
         
     }

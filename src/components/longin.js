@@ -48,24 +48,27 @@ const Longin = () => {
                     }}
                     placeholder = "Password"
                 />
-                <Button2
+                <button
                     className={css`
                         background-color: ${color[0]};
-
+                        font-size: 30px;
+                        padding: 5px;
+                        
+                        margin-bottom: 20px;
                     `}
                     onClick= { ()=> {
                         logInWithEmailAndPassword(email, password)
                     }}
                 >
                     Login
-                </Button2>
-                {/*<button className="login-with-google" onClick={signInWithGoogle}>
+                </button>
+                <button className="login-with-google" onClick={signInWithGoogle}>
                     Longin With Google
-                </button> */}
+                </button>
                 
-                {/* <div>
-                    <Link to = "/reset">Forgot Password</Link> 
-                </div> */}
+                <div>
+                    <Link to="/reset">Forgot Password</Link> 
+                </div>
                 <div>
                     Don't have and account? <Link to="/register">Register </Link> now. 
                 </div>

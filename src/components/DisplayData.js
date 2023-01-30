@@ -6,6 +6,7 @@ import { db, auth } from '../firebase-config'
 import { collection, query, where, getDocs, orderBy } from 'firebase/firestore'
 import BarChart from './BarChart';
 import { useSelector } from "react-redux";
+import { css } from '@emotion/css';
 import * as tf from '@tensorflow/tfjs';
 
 
@@ -235,7 +236,7 @@ document.addEventListener('DOMContentLoaded', run);
 
 
     return ( 
-        <div className='display-data'>
+        <div className={css`padding-top: 10%;`}>
           {fetchRes}
           <h4>time working times focus, over time of day</h4>
           <BarChart chartData={justTodayFocusAndworkData} />

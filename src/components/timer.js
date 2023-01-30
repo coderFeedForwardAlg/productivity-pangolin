@@ -80,7 +80,12 @@ const Timer = () => {
     const endTimer = () => {
         const  now = new Date().getTime();
         //TODO: bug, if now is much later because timer is poused 
-        const distance = (countDownTime - now);
+        let distance;
+        if(!pause){
+            distance = (countDownTime - now);
+        }else{
+            distance = countDownTime - (now + timePaused); 
+        }
         const seconds = Math.floor((distance) / 1000);
         const timeDone = ( id * 60 - seconds) / 60;
         history.push(`/goodWork/${timeDone}`);
@@ -101,11 +106,9 @@ const pause = () => {
     if(paused){
         const unPause = new Date().getTime();
             //TODO: bug is still their (time still recorded when paused and then ended)
-        if(paused){
-            timePaused = unPause - startPauseTime;
-        }else{
-            timePaused = unPause - startPauseTime; 
-        }
+        
+        timePaused = unPause - startPauseTime; 
+        
         console.log(startPauseTime / 1000);
         console.log(unPause / 1000);
         console.log(timePaused / 1000);

@@ -1,8 +1,11 @@
 import { logout } from "../firebase-config";
 import { useHistory } from "react-router-dom";
 import { css } from '@emotion/css';
+import { useSelector } from "react-redux";
+import {Button2} from './styles/Button';
 
 const Logout = () => {
+    const color = useSelector((state) => state.color.value);
     const history = useHistory();
     const signout = () => {
         history.push("/work");
@@ -13,8 +16,9 @@ const Logout = () => {
             position: fixed;
             left: 40%;
             top: 40%;
+            
         `}>
-            <button2 className="logout-btn" onClick={signout}>logout</button2>
+            <Button2 className={css`background-color: ${color[0]};`} onClick={signout}>logout</Button2>
         </div>
      );
 }

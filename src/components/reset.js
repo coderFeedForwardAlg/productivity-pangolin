@@ -4,6 +4,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { useHistory } from "react-router-dom";
 import { Link } from "react-router-dom";
 import {auth, sendPasswordReset } from "../firebase-config";
+import { css } from '@emotion/css';
 //import "./Reset.css";
 
 const Reset = () => {
@@ -15,7 +16,7 @@ const Reset = () => {
         if (user) history.push("/dashboard");
     }, [user, loading]);
     return ( 
-        <div className="reset">
+        <div className={css`padding-top: 10%;`}>
             <div className="reset-container">
                 <input 
                     type="text" 
