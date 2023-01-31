@@ -50,7 +50,7 @@ const GoodWork = () => {
             
         
     }
-
+    document.title =  "Productivity Pangolin";
     
     return ( 
         <div className={css`

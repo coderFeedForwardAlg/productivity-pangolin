@@ -13,6 +13,7 @@ import Dashboard from './components/dashboard';
 import Logout from './components/Logout';
 import NewBreak from './components/NewBreak';
 import Settings from './components/Settings';
+import Music from "./components/Music";
 
 
 
@@ -21,6 +22,7 @@ function App() {
     <Router>
       <div className='App'>
         <NavBar/>
+        <Music/>
         <Switch>
 
             <Route exact path="/">

@@ -23,9 +23,10 @@ const NewWorkSesh = () => {
         event.preventDefault();
         start();
       }
-
+    document.title =  "Productivity Pangolin";
     const start = ()=>{
-        if (time.match(/[^0-9.]/)){
+        let s = time.toString(); 
+        if (s.match(/[^0-9.]/)){
             alert("can only use numbers in the study time field");
         }else{
                 // if user them card 

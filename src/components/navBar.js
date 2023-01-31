@@ -72,7 +72,7 @@ const NavBar = () => {
                 padding: 0%;
                 margin-top: 0%;
                 font-size: 25px;
-                z-index: 2;
+                z-index: 3;
                 @media(max-width: 720px){
                     display: block;
                 }

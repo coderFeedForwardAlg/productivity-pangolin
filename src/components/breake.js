@@ -35,6 +35,7 @@ const Break = () => {
         }
         return `${min}:${sec}`; 
     }
+    document.title =  displayTime() + " Productivity Pangolin";
     return ( 
         <div className={css`
             background: linear-gradient(to left, ${color[1]}  0%,  ${color[2]} 100%);
