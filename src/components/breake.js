@@ -10,9 +10,8 @@ const Break = () => {
     const [time, setTime] = useState(timeparam * 60); 
     const [countDownTime, setCountDownTime] = useState(new Date().getTime() + time * 1000);
     const history = useHistory();
-    const audio = new Audio(sound);
+    const audio = new Audio(sound); 
     const color = useSelector((state) => state.color.value);
-
     useEffect(()=>{
         const interval = setInterval(()=>{
             clearInterval(interval);

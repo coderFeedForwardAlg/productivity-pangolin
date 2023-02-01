@@ -10,7 +10,10 @@ E7DFDD
     color: #0E0B16; 
     font-family: Arial, sans-serif;
   }
-
+  ::-webkit-scrollbar {
+    width: 0px;
+    background: transparent; /* make scrollbar transparent */
+  }
 .timer{
     background: linear-gradient(to left,#8110a0  0%,  #3beefe 100%);
     text-align: center;
