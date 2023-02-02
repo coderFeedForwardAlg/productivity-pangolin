@@ -17,8 +17,9 @@ const Logout = () => {
             left: 40%;
             top: 40%;
             
+            
         `}>
-            <Button2 className={css`background-color: ${color[0]};`} onClick={signout}>logout</Button2>
+            <Button2 className={css`background-color: ${color[0]}; color: ${color[4]};`} onClick={signout}>logout</Button2>
         </div>
      );
 }

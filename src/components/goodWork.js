@@ -62,9 +62,12 @@ const GoodWork = () => {
         `}>
             <h1 className={css`
                 padding-top:10%;
+                color: ${color[4]};
             `}>Good Work</h1>
             {<form onSubmit={handleSubmit}>
-                <label><h2>How focused were you out of 10?</h2></label>
+                <label><h2 className={css`
+                color: ${color[4]};
+            `}>How focused were you out of 10?</h2></label>
                 <input placeholder="10" onChange={(e)=>{
                     setFocus(e.target.value);
                 }}
@@ -73,7 +76,8 @@ const GoodWork = () => {
                 
             </form> }
             <Button2 className={css`
-                background-color: ${color[0]}
+                background-color: ${color[0]};
+                color: ${color[4]};
             `} onClick={start}>
                 Take a Break
             </Button2>

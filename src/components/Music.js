@@ -166,26 +166,32 @@ const Music = () => {
             
             <MusicButton className={css`
                 background-color: ${color[0]};
+                color: ${color[4]};
             `} onClick={() => playMusic(0)}>Slavic Lo-Fi</MusicButton>
 
             <MusicButton className={css`
-                background-color: ${color[0]};    
+                background-color: ${color[0]};
+                color: ${color[4]};    
             `} onClick={() => playMusic(1)}> Tokyo Lo-Fi</MusicButton>
 
             <MusicButton className={css`
-                background-color: ${color[0]};    
+                background-color: ${color[0]};
+                color: ${color[4]};    
             `} onClick={() => playMusic(2)}>Retro Platforming</MusicButton>
 
             <MusicButton className={css`
-                background-color: ${color[0]};    
+                background-color: ${color[0]}; 
+                color: ${color[4]};   
             `} onClick={() => playMusic(3)}>Time Alone</MusicButton>
 
             <MusicButton className={css`
-                background-color: ${color[0]};    
+                background-color: ${color[0]};   
+                color: ${color[4]}; 
             `} onClick={() => playMusic(4)}>Homework</MusicButton>
             
             <MusicButton className={css`
-                background-color: ${color[0]};    
+                background-color: ${color[0]};   
+                color: ${color[4]}; 
             `} onClick={() => playMusic(5)}>Dancing In The Desert</MusicButton>
             </ul>
     </div> );

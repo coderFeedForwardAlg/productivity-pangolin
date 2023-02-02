@@ -53,7 +53,7 @@ const Longin = () => {
                         background-color: ${color[0]};
                         font-size: 30px;
                         padding: 5px;
-                        
+                        color: ${color[4]};
                         margin-bottom: 20px;
                     `}
                     onClick= { ()=> {

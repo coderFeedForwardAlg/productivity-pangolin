@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit';
-  // button color, background right, background left, nav 
-const purpleArr = ["blueviolet", "#8110a0", "#3beefe", "#A23ACA"]; 
-const greenArr = ["#663300", "#003300", "#009900", "#004d00"];
-const pinkArr = ["#990099",  "#e600ac", "#ff66b3", "#cc00cc" ];
-const blueArr = ["#000099", "#0000b3", "#3333ff", "#000099"];
+  // button color, background right, background left, nav, text  
+const purpleArr = ["blueviolet", "#8110a0", "#3beefe", "#A23ACA", "#000000"]; 
+const greenArr = ["#663300", "#003300", "#009900", "#004d00", "#000000"];
+const pinkArr = ["#990099",  "#e600ac", "#ff66b3", "#cc00cc", "#000000" ];
+const blueArr = ["#000099", "#0000b3", "#3333ff", "#000099", "#ffffff"];
 
 let initialState;
 switch(localStorage.getItem("color")){

@@ -46,6 +46,7 @@ const Settings = () => {
             <h3 className={css`
                 font-size: 40px;
                 padding-top: 10%;
+                color: ${color[4]};
                 @media (max-width: 420px){
                     font-size: 15px;
                     padding-top: 20%;

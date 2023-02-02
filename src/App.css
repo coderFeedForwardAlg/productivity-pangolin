@@ -24,10 +24,7 @@ E7DFDD
     /*position: fixed; */ 
 }
 
-.timer-text{
-  font-size: 40px;
-  padding-top: 10%;
-}
+
 
 .set-times{
   display: flex;

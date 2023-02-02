@@ -129,21 +129,28 @@ const pause = () => {
             width: 100%;
             background-size: cover;
             height: 100vh;
+            color: ${color[4]};
             @media (max-width: 420px){
                 font-size: 50px; 
             }
         `}>
-            <h3 className='timer-text'>Work Time!</h3>
+            <h3 className={css`
+                font-size: 40px;
+                padding-top: 10%;
+                color: ${color[4]};
+            `}>Work Time!</h3>
             {displayTime()}
             <br/>
             {wantEndCard}
             <Button2 className={css`
-                background-color: ${color[0]};    
+                background-color: ${color[0]};  
+                color: ${color[4]};
             `}  onClick={pause}>
                 {pauseText}
             </Button2>
             <Button2 className={css`
-                background-color: ${color[0]};    
+                background-color: ${color[0]}; 
+                color: ${color[4]};
             `} onClick={wantToEndTimer}> End Timer</Button2>
             
 

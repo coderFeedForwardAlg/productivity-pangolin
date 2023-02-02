@@ -91,8 +91,8 @@ const NewWorkSesh = () => {
 
                     }
                 `} />
-                <form onSubmit={handleSubmit}>
-                    <label id="new-work-lable"><h2>How Long Do You Want To Work</h2></label>
+                <form  className={css`color: ${color[4]};`} onSubmit={handleSubmit}>
+                    <label id="new-work-lable"><h2 className={css`color: ${color[4]};`}>How Long Do You Want To Work</h2></label>
                     <input placeholder="25" onChange={(e)=>{
                         setTime(e.target.value);
                     }}/>
@@ -100,7 +100,8 @@ const NewWorkSesh = () => {
                     <error>{errors.duration?.type === "pattern" && "please only enter numbers"}</error> */}
                  </form>
                  <Button2 className={css`
-                        background-color: ${color[0]}; 
+                        background-color: ${color[0]};
+                        color: ${color[4]};
                  `} onClick={start}>Start</Button2>
             </div>
                 

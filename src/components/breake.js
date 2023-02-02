@@ -43,8 +43,13 @@ const Break = () => {
             width: 100%;
             background-size: cover;
             height: 100vh;
+            color: ${color[4]};
         `}>
-            <h3 className='timer-text'>Break Time!</h3>
+            <h3 className={css`
+                font-size: 40px;
+                padding-top: 10%;
+                color: ${color[4]};
+            `}>Break Time!</h3>
             {displayTime()}
         </div>
      );

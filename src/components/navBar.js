@@ -68,6 +68,7 @@ const NavBar = () => {
 
                 display: none;
                 background-color: ${color[3]};
+                
                 position: fixed;
                 padding: 0%;
                 margin-top: 0%;
@@ -106,11 +107,11 @@ const NavBar = () => {
                 
             `}>
 
-                <li> <Link to="/landing" className='brandLink'><h1>Productivity Pangolin</h1> </Link></li>
-                <li><Link to="/work" className='brandLink'><h1>Work</h1> </Link> </li>
-                <li><Link to={link} className='brandLink'><h1>{title}</h1> </Link> </li>
-                <li><Link to="/display" className='brandLink'><h1>Data</h1> </Link></li> 
-                <li><Link to="/settings" className='brandLink'><h1> Settings</h1> </Link></li>
+                <li> <Link to="/landing" className='brandLink'><h1  className={css`color: ${color[4]};`}>Productivity Pangolin</h1> </Link></li>
+                <li><Link to="/work" className='brandLink'><h1 className={css`color: ${color[4]};`}>Work</h1> </Link> </li>
+                <li><Link to={link} className='brandLink'><h1 className={css`color: ${color[4]};`}>{title}</h1> </Link> </li>
+                <li><Link to="/display" className='brandLink'><h1 className={css`color: ${color[4]};`}>Data</h1> </Link></li> 
+                <li><Link to="/settings" className='brandLink'><h1 className={css`color: ${color[4]};`}> Settings</h1> </Link></li>
             </ul>
 
             
