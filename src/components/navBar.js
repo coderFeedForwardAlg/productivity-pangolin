@@ -72,7 +72,7 @@ const NavBar = () => {
                 padding: 0%;
                 margin-top: 0%;
                 font-size: 25px;
-                z-index: 3;
+                z-index: 5;
                 @media(max-width: 720px){
                     display: block;
                 }
@@ -91,9 +91,10 @@ const NavBar = () => {
                     /* changed to vw to ajust for smaller screans
                 font-size: 1.4vw; */
                 background-color: ${color[3]};
-                
+                z-index:4;
                 
                 @media (max-width: 720px){
+                    position:fixed;
                     width: 50%;
                     grid-template-columns: 45%;
                     display: ${visible}; 

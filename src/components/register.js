@@ -57,9 +57,9 @@ const Register = () => {
              <button className="longin-btn" onClick={register}>
                  Register
              </button>
-            {/*} <button className="register-btn register-google"  onClick={signInWithGoogle}>
+            <button className="register-btn register-google"  onClick={signInWithGoogle}>
                  Register with Google
-            </button> */}
+            </button>
              <div>
                  Already have an account? <Link to="login">Login</Link> now.
              </div>

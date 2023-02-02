@@ -34,29 +34,25 @@ const Music = () => {
     const color = useSelector((state) => state.color.value);
 
     
-    let icons = [];
-    icons[0] = <i class="fa fa-play"></i>;
-    
+
+
     const playMusic = (a) => {
-        
+        let pause = <i className="fa fa-pause"></i>;
+        let play =  <i className="fa fa-play"></i>;
         for(let i = 0; i < audioArr.length; i++){
             if(i != a){
                 audioArr[i].pause();
             }
-            // let e1 = document.getElementById(i.toString());
-            //  e1.innerHTML = `<i class="fa fa-pause"></i> `;
+            
         }
-        // let e = document.getElementById(a.toString());
-        // e.innerHTML = `<i class="fa fa-play"></i> `;
+
         if(!audioArr[a].paused){
             audioArr[a].pause();
-            icons[0] = <i class="fa fa-play"></i>;
         }else{
             audioArr[a].loop = true;
             audioArr[a].volume = 0.2;  
             audioArr[a].play();
-            icons[0] = <i class="fa fa-pause"></i>;
-            
+
         }
         
         
@@ -84,7 +80,13 @@ const Music = () => {
     `
     const [move, setMove] = useState(moveOut);
     const [visible, setVisible]= useState("none");
+    const[symbol, setSymbol] = useState("🎵");
     const moveInOut = () =>{
+        if(symbol === "🎵"){
+            setSymbol(" X ");
+        }else{
+            setSymbol("🎵");
+        }
         if(move == moveIn){
             setMove(moveOut);
             setTimeout(function() {
@@ -101,8 +103,11 @@ const Music = () => {
     return ( 
         <div className={css`
             float:left;
-            margin-top: 7%;
+            margin-top: 90px;
             z-index: 2;
+            @media(max-width: 720px){
+                margin-top: 30px;
+            }
         `}>
             <button className={css`
                 display: none;
@@ -113,12 +118,13 @@ const Music = () => {
                 font-size: 25px;
                 display: block;
                 z-index: 3;
+                border-radius: 6px;
                 @media(max-width: 720px){
                     float: left;
                     left: 0; 
                     margin: 0px;
                 }
-            `} onClick={moveInOut}>🎵</button>
+            `} onClick={moveInOut}>{symbol}</button>
 
 
             <ul className={css`
@@ -143,7 +149,7 @@ const Music = () => {
 
                 @media(max-width: 720px){
                     width: 50%;
-                    margin-top: 30%;
+                    
                 }
             `}>
             
@@ -160,16 +166,13 @@ const Music = () => {
             
             <MusicButton className={css`
                 background-color: ${color[0]};
-            `} onClick={() => playMusic(0)}>
-                <div id="0"></div>
-            
-            Slavic Lo-Fi</MusicButton>
+            `} onClick={() => playMusic(0)}>Slavic Lo-Fi</MusicButton>
 
             <MusicButton className={css`
                 background-color: ${color[0]};    
-            `} onClick={() => playMusic(1)}> <div id="1"></div>Tokyo Lo-Fi</MusicButton>
+            `} onClick={() => playMusic(1)}> Tokyo Lo-Fi</MusicButton>
 
-            <MusicButton id="2" className={css`
+            <MusicButton className={css`
                 background-color: ${color[0]};    
             `} onClick={() => playMusic(2)}>Retro Platforming</MusicButton>
 

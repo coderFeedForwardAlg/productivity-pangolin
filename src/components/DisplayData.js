@@ -236,7 +236,13 @@ document.addEventListener('DOMContentLoaded', run);
 
 
     return ( 
-        <div className={css`padding-top: 10%;`}>
+        <div className={css`
+          padding-top: 140px;
+          padding-left: 10px;
+          @midia(min-width: 720){
+            padding-top: 0px; // TODO: not working 
+          }
+        `}>
           {fetchRes}
           <h4>time working times focus, over time of day</h4>
           <BarChart chartData={justTodayFocusAndworkData} />
