@@ -33,12 +33,68 @@ const Music = () => {
 
     const color = useSelector((state) => state.color.value);
 
-    
+    let pause = <i className="fa fa-pause"></i>;
+    let play =  <i className="fa fa-play"></i>;
+
+
+;
+
+    const [icon0, setIcon0] = useState(play);
+    const [icon1, setIcon1] = useState(play);
+    const [icon2, setIcon2] = useState(play);
+    const [icon3, setIcon3] = useState(play);
+    const [icon4, setIcon4] = useState(play);
+    const [icon5, setIcon5] = useState(play);
+    const [icon6, setIcon6] = useState(play);
+
+
+    const setIcons = (songThatsOn) =>{
+        if(songThatsOn == 0){
+            setIcon0(pause);
+        }else{
+            setIcon0(play);
+        }
+
+        if(songThatsOn == 1){
+            setIcon1(pause);
+        }else{
+            setIcon1(play);
+        }
+
+        if(songThatsOn == 2){
+            setIcon2(pause);
+        }else{
+            setIcon2(play);
+        }
+
+        if(songThatsOn == 3){
+            setIcon3(pause);
+        }else{
+            setIcon3(play);
+        }
+
+        if(songThatsOn == 4){
+            setIcon4(pause);
+        }else{
+            setIcon4(play);
+        }
+
+        if(songThatsOn == 5){
+            setIcon5(pause);
+        }else{
+            setIcon5(play);
+        }
+
+        if(songThatsOn == 6){
+            setIcon6(pause);
+        }else{
+            setIcon6(play);
+        }
+    }
 
 
     const playMusic = (a) => {
-        let pause = <i className="fa fa-pause"></i>;
-        let play =  <i className="fa fa-play"></i>;
+        setIcons(-1);
         for(let i = 0; i < audioArr.length; i++){
             if(i != a){
                 audioArr[i].pause();
@@ -52,6 +108,7 @@ const Music = () => {
             audioArr[a].loop = true;
             audioArr[a].volume = 0.2;  
             audioArr[a].play();
+            setIcons(a);
 
         }
         
@@ -167,32 +224,32 @@ const Music = () => {
             <MusicButton className={css`
                 background-color: ${color[0]};
                 color: ${color[4]};
-            `} onClick={() => playMusic(0)}>Slavic Lo-Fi</MusicButton>
+            `} onClick={() => playMusic(0)}> <div className={css`float: left`}>{icon0}</div> Slavic Lo-Fi</MusicButton>
 
             <MusicButton className={css`
                 background-color: ${color[0]};
                 color: ${color[4]};    
-            `} onClick={() => playMusic(1)}> Tokyo Lo-Fi</MusicButton>
+            `} onClick={() => playMusic(1)}><div className={css`float: left`}>{icon1}</div>Tokyo Lo-Fi</MusicButton>
 
             <MusicButton className={css`
                 background-color: ${color[0]};
                 color: ${color[4]};    
-            `} onClick={() => playMusic(2)}>Retro Platforming</MusicButton>
+            `} onClick={() => playMusic(2)}><div className={css`float: left`}>{icon2}</div>Retro Platforming</MusicButton>
 
             <MusicButton className={css`
                 background-color: ${color[0]}; 
                 color: ${color[4]};   
-            `} onClick={() => playMusic(3)}>Time Alone</MusicButton>
+            `} onClick={() => playMusic(3)}><div className={css`float: left`}>{icon3}</div>Time Alone</MusicButton>
 
             <MusicButton className={css`
                 background-color: ${color[0]};   
                 color: ${color[4]}; 
-            `} onClick={() => playMusic(4)}>Homework</MusicButton>
+            `} onClick={() => playMusic(4)}><div className={css`float: left`}>{icon4}</div>Homework</MusicButton>
             
             <MusicButton className={css`
                 background-color: ${color[0]};   
                 color: ${color[4]}; 
-            `} onClick={() => playMusic(5)}>Dancing In The Desert</MusicButton>
+            `} onClick={() => playMusic(5)}><div className={css`float: left`}>{icon5}</div>Dancing In The Desert</MusicButton>
             </ul>
     </div> );
 }
