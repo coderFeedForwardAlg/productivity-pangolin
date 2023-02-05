@@ -35,6 +35,43 @@ const Break = () => {
         return `${min}:${sec}`; 
     }
     document.title =  displayTime() + " Productivity Pangolin";
+
+    const [wantEndCard, setWantEndCard] = useState(<div> </div>);
+
+    const wantToEndTimer = () => {
+        setWantEndCard(<div className={css`
+            font-size: 20px;
+            padding: 3%;
+            background-color: ${color[1]};
+            border: #000000;
+            width: max-content;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: rotateX(0deg) translate(-50%, -50%);
+            border-radius: 10%;
+            border-style: solid;
+        `}> 
+            Do you want to end? 
+            <br />  
+            <Button2 className={css`
+                background-color: ${color[0]}; 
+            `} onClick={endTimer}> End Break</Button2>
+            <br />
+            <Button2 className={css`
+                    background-color: ${color[0]}; 
+            `} onClick={dontEndTimer}> Don't End Break</Button2>
+        </div>) 
+    }
+
+    const endTimer = () => {
+        history.push("/work");
+    } 
+    const dontEndTimer = () => {
+        setWantEndCard(<div> </div>)
+    } 
+
+
     return ( 
         <div className={css`
             background: linear-gradient(to left, ${color[1]}  0%,  ${color[2]} 100%);
@@ -45,12 +82,18 @@ const Break = () => {
             height: 100vh;
             color: ${color[4]};
         `}>
+            {wantEndCard}
             <h3 className={css`
                 font-size: 40px;
                 padding-top: 10%;
                 color: ${color[4]};
             `}>Break Time!</h3>
             {displayTime()}
+            <br/>
+            <Button2 className={css`
+                background-color: ${color[0]}; 
+                color: ${color[4]};
+            `} onClick={wantToEndTimer}> End Break</Button2>
         </div>
      );
 }
