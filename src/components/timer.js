@@ -8,6 +8,9 @@ import { useSelector } from "react-redux";
 
 const Timer = () => {
    const { id } = useParams();
+   // TODO: if id == null {go back to new work sesh}
+        // same for break timer 
+
         // how long the timer should run in seconts 
    const [time, setTime] = useState(id * 60);
    const history = useHistory();

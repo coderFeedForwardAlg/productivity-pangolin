@@ -1,6 +1,6 @@
 import { css, keyframes } from '@emotion/css';
 import { useSelector } from "react-redux";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Button2, MusicButton } from "./styles/Button";
 
 import 'font-awesome/css/font-awesome.min.css';
@@ -30,6 +30,7 @@ const Music = () => {
     audioArr[5] = audioDancingDesert;
 
     
+
 
     const color = useSelector((state) => state.color.value);
 
@@ -156,9 +157,27 @@ const Music = () => {
         }
     }
 
+
+            // for cklicking away 
+        const catMenu = useRef(true)
+        const [openSlide, setopenSlide] = useState(true); 
+        const closeOpenMenus = (e)=>{
+            if(catMenu.current && openSlide && !catMenu.current.contains(e.target) && move == moveOut){
+                
+              setopenSlide(false);
+              moveInOut();
+              console.log("loos focus");
+              
+    
+            }
+            
+            
+        }
+        document.addEventListener('mousedown',closeOpenMenus);
+
     
     return ( 
-        <div className={css`
+        <div ref={catMenu} className={css`
             float:left;
             margin-top: 90px;
             z-index: 2;
@@ -211,14 +230,6 @@ const Music = () => {
             `}>
             
             
-            {/* <div onClick={() => playMusic(0)} >
-                <MusicPlayButton icon1 = "fa fa-pause" icon2 = "fa fa-play" text = "Slavic Lo-Fi" />
-            </div>
-
-            
-            <div onClick={() => playMusic(1)} >
-                <MusicPlayButton icon1 = "fa fa-pause" icon2 = "fa fa-play" text = "Tokyo Lo-Fi" />
-            </div> */}
 
             
             <MusicButton className={css`
