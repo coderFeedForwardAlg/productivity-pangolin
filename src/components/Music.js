@@ -157,27 +157,15 @@ const Music = () => {
         }
     }
 
-
-            // for cklicking away 
-        const catMenu = useRef(true)
-        const [openSlide, setopenSlide] = useState(true); 
-        const closeOpenMenus = (e)=>{
-            if(catMenu.current && openSlide && !catMenu.current.contains(e.target) && move == moveOut){
-                
-              setopenSlide(false);
-              moveInOut();
-              console.log("loos focus");
-              
-    
-            }
-            
-            
+    const handleBlur = (e)=> {
+        if(symbol != "🎵"){
+            console.log(e);
+            moveInOut();
         }
-        document.addEventListener('mousedown',closeOpenMenus);
-
+    }
     
     return ( 
-        <div ref={catMenu} className={css`
+        <div  className={css`
             float:left;
             margin-top: 90px;
             z-index: 2;
@@ -202,8 +190,8 @@ const Music = () => {
                 }
             `} onClick={moveInOut}>{symbol}</button>
 
-
-            <ul className={css`
+                {/* onBlur={handleBlur} */}
+            <ul  className={css`
                 margin: 0;
                 margin-top: 0%;
                 padding: 10px;

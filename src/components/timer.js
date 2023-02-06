@@ -10,10 +10,14 @@ const Timer = () => {
    const { id } = useParams();
    // TODO: if id == null {go back to new work sesh}
         // same for break timer 
+    const history = useHistory();
+    if(Number.isNaN(id)){
+        history.push("/work");
+    }
 
         // how long the timer should run in seconts 
    const [time, setTime] = useState(id * 60);
-   const history = useHistory();
+   
    const [pauseText, setPauseText] = useState("Pause Timer");
    const [paused, setPaused] = useState(false); 
    const [countDownTime, setCountDownTime] = useState(new Date().getTime() + time * 1000);
