@@ -23,7 +23,7 @@ const NewWorkSesh = () => {
         event.preventDefault();
         start();
       }
-    document.title =  "Productivity Pangolin";
+    document.title =  "Pomodoro Timer: Productivity Pangolin";
     const start = ()=>{
         let s = time.toString(); 
         if (s.match(/[^0-9.]/)){

@@ -62,7 +62,13 @@ const Longin = () => {
                 >
                     Login
                 </button>
-                <button className="login-with-google" onClick={signInWithGoogle}>
+                <button className={css`
+                        background-color: ${color[0]};
+                        font-size: 30px;
+                        padding: 5px;
+                        color: ${color[4]};
+                        margin-bottom: 20px;
+                    `} onClick={signInWithGoogle}>
                     Longin With Google
                 </button>
                 

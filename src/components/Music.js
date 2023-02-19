@@ -157,15 +157,16 @@ const Music = () => {
         }
     }
 
+    const thisRef = useRef();
     const handleBlur = (e)=> {
-        if(symbol != "🎵"){
+        if(symbol != "🎵" && e.path !== thisRef.current){
             console.log(e);
             moveInOut();
         }
     }
     
     return ( 
-        <div  className={css`
+        <div onBlur={handleBlur} className={css`
             float:left;
             margin-top: 90px;
             z-index: 2;

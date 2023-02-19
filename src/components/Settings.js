@@ -58,7 +58,7 @@ const Settings = () => {
                 
             `}>
                 
-                <Button2 className={css`background:#663300`} onClick={updateColorGreen}>Green Forist</Button2>
+                <Button2 className={css`background:#663300`} onClick={updateColorGreen}>Green Forest</Button2>
                 
                 <Button2 className={css`background:blueviolet`} onClick={updateColorPurple}>Purple Future</Button2>
                 

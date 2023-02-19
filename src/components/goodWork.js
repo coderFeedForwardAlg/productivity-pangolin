@@ -50,7 +50,7 @@ const GoodWork = () => {
             
         
     }
-    document.title =  "Productivity Pangolin";
+    document.title =  "Pomodoro Timer: Productivity Pangolin";
     
     return ( 
         <div className={css`
