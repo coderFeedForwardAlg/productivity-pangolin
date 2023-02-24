@@ -9,6 +9,24 @@ import { useSelector } from "react-redux";
 import { css } from '@emotion/css';
 import * as tf from '@tensorflow/tfjs';
 
+// for offline 
+import { enableIndexedDbPersistence } from "firebase/firestore"; 
+
+enableIndexedDbPersistence(db)
+  .catch((err) => {
+      if (err.code == 'failed-precondition') {
+          // Multiple tabs open, persistence can only be enabled
+          // in one tab at a a time.
+          // ...
+          console.log(err);
+      } else if (err.code == 'unimplemented') {
+          // The current browser does not support all of the
+          // features required to enable persistence
+          // ...
+          console.log(err);
+      }
+  });
+
 
 const DisplayData = () => {
   const [workSession, setWorkSession] = useState([]);
