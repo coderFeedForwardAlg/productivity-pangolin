@@ -69,7 +69,7 @@ const NavBar = () => {
 
                 display: none;
                 background-color: ${color[3]};
-                
+                float: right;
                 position: fixed;
                 padding: 0%;
                 margin-top: 0%;
