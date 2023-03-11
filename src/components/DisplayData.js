@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useState } from 'react';
 import '../App.css';
 import { useAuthState } from "react-firebase-hooks/auth";
-import { db, auth } from '../../firebase-config'
+import { db, auth } from '../firebase-config'
 import { collection, query, where, getDocs, orderBy } from 'firebase/firestore'
 import BarChart from './BarChart';
 import { useSelector } from "react-redux";

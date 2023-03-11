@@ -29,10 +29,10 @@ const NavBar = () => {
     
     const moveIn = keyframes`
         from {
-            transform: translateX(-100%);
+            transform: translateX(200%);
         }
         to {
-            transform: translateX(0);
+            transform: translateX(0%);
         }
     `
          
@@ -41,7 +41,7 @@ const NavBar = () => {
             transform: translateX(0%);
         }
         to {
-            transform: translateX(-100%);
+            transform: translateX(200%);
         }
     `
 
@@ -70,13 +70,15 @@ const NavBar = () => {
                 display: none;
                 background-color: ${color[3]};
                 float: right;
-                position: fixed;
+                /*position: fixed;*/
                 padding: 0%;
                 margin-top: 0%;
                 font-size: 25px;
                 z-index: 5;
                 @media(max-width: 720px){
                     display: block;
+                    padding: 10px;
+                    border-radius: 20%;
                 }
                     
             `} onClick={menu}>Menu</ul>
@@ -98,10 +100,13 @@ const NavBar = () => {
                 @media (max-width: 720px){
                     position:fixed;
                     width: 50%;
+                    left:50%;
+                    top:45px;
                     grid-template-columns: 45%;
                     display: ${visible}; 
                     animation: ${move} 1s;
                     overflow: hidden;
+                    border-radius: 5%;
                     
                     
                 }
