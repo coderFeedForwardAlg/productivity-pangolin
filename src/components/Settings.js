@@ -54,7 +54,10 @@ const Settings = () => {
             `}>You can change the color theme!</h3>
             <div className={css`
                 display: grid;
-                grid-template-columns: 45%;
+                grid-template-columns: 25%;
+                @media (max-width: 720px){
+                    grid-template-columns: 100%;
+                }
                 
             `}>
                 
