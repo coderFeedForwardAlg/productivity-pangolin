@@ -7,6 +7,7 @@ import { collection, query, where, getDocs, orderBy } from 'firebase/firestore'
 import BarChart from './BarChart';
 import { useSelector } from "react-redux";
 import { css } from '@emotion/css';
+import Axios from 'axios';
 
 
 
@@ -29,7 +30,8 @@ const DisplayData = () => {
   let justTodayFocusAndworkArr = [];
   let todayDurationArr = [];
   let todayFocusArr = [];
-  
+  let day = [];
+  let avrDir = [];
     // useState that sets vars to objects with all the data a chart needs  
   const [workData, setWorkData] = useState({
     labels: labelsArr,
@@ -82,6 +84,15 @@ const DisplayData = () => {
       backgroundColor: color[1],
     }]
   });
+
+  const [avrDirData, setAvrDirData] = useState({
+    labels: labelsArr,
+    datasets: [{
+      label: "focus data",
+      data: todayFocusArr,
+      backgroundColor: color[1],
+    }]
+  });
   
 
     //load data into arrays 
@@ -92,7 +103,6 @@ const DisplayData = () => {
       querySnapshot.forEach((doc) => {
           // for today charts 
         let today = new Date();
-        console.log(doc.data().startWorkTime.toDate());
         if(doc.data().startWorkTime.toDate().getDate() == today.getDate() && doc.data().startWorkTime.toDate().getMonth() == today.getMonth() ){
           justTodayFocusAndworkArr.push(doc.data().duration * doc.data().productivity);
           todayFocusArr.push(doc.data().productivity);
@@ -104,6 +114,7 @@ const DisplayData = () => {
           //for all time charts 
         durationArr.push(doc.data().duration);
         labelsArr.push(new Date(doc.data().startWorkTime.seconds*1000).getDate());
+        day.push(new Date(doc.data().startWorkTime.seconds*1000).getDay());
         focusArr.push(doc.data().productivity);
         focusAndworkArr.push(doc.data().duration * doc.data().productivity);
       });
@@ -114,7 +125,10 @@ const DisplayData = () => {
       console.log(err);
       console.log("userID");
     }
-    
+    avrDir = await postData();
+    console.log("avr dir" );
+    console.log(avrDir.data[0]);
+    // console.log("post data " + await postData());
   };
   
     // fetch the data from fierbase and call getWork() from above 
@@ -207,32 +221,47 @@ const DisplayData = () => {
     ]
     });
 
+    
+
+
   },[userID, user]);
-/*
-// ML modle 
-async function run() {
-  // Load and plot the original input data that we are going to train on.
+
+
+
   
-  const values = ({
-    x: durationArr,
-    y: focusArr,
-  });
-
-  tfvis.render.scatterplot(
-    {name: 'Horsepower v MPG'},
-    {values},
-    {
-      xLabel: 'Horsepower',
-      yLabel: 'MPG',
-      height: 300
+  const postData =  async () => {
+    const json = {
+      "durationArr" : durationArr,
+      "day": day
     }
-  );
+  
+    try {
+      const response = await Axios.post("https://flask-api-kr3iijg4ca-uc.a.run.app/json_example", json);
+      console.log("responc: ");
+      console.log(response);
+      setAvrDirData({
+        labels: ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saterday"],
+        datasets: [
+        {
+          label: "avirege deration",
+          data: response.data,
+          backgroundColor: color[1],
+        }
+      ]
+      });
+      return response
+    } catch (error) {
+      if (error.response) {
+        console.log(error.reponse.status);
+      } else {
+        console.log(error.message);
+      }
+    }
+    
+  }
+  
 
-  // More code will be added below
-}
-
-document.addEventListener('DOMContentLoaded', run);
-*/
+  
 
 
 
@@ -251,6 +280,8 @@ document.addEventListener('DOMContentLoaded', run);
           <BarChart chartData={todayDurationData} />
           <h4>focus, over time of day</h4>
           <BarChart chartData={todayFocusData} />
+          <h4>average work session deration for each day of the week </h4>
+          <BarChart chartData={avrDirData} />
           <h4>time working times focus, over the day of the month</h4>
           <BarChart chartData={focusAndWorkData}  />
           <h4>time working, over the day of the month</h4>
@@ -258,6 +289,7 @@ document.addEventListener('DOMContentLoaded', run);
           <h4>focus, over the day of the month</h4>
           <BarChart chartData={focusData} />
           
+
           {/*workSession.map( (duration) => {return <div> how long you worked: {duration.duration} </div>}) */}
           { /*<p>This chart shows how long you have worked</p> */}
         </div>
