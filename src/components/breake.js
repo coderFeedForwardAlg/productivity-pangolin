@@ -99,8 +99,8 @@ const Break = () => {
                 color: ${color[4]};
             `}>break checklist!
             <p>exersize <input type="checkbox"/></p>
-            <p>read acomplishments <input type="checkbox"/></p>
-            <p>walk <input type="checkbox"/></p>
+            <p>think positive thoughts <input type="checkbox"/></p>
+            <p>reword self <input type="checkbox"/></p>
             </h3>
         </div>
      );
