@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import pangolinPic from './imgs/pangolinImg.png';
+import pangolinTalk from './imgs/moreThanNormal.png'
 import StudyMusic from "./StudyMusic";
 import { auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -22,7 +23,9 @@ const NewWorkSesh = () => {
     const handleSubmit = (event) => {
         event.preventDefault();
         start();
-      }
+    }
+
+    
     document.title =  "Pomodoro Timer: Productivity Pangolin";
     const start = ()=>{
         let s = time.toString(); 
@@ -81,7 +84,7 @@ const NewWorkSesh = () => {
                     grid-template-rows: 45%; 
                 }
             `}>
-                <img src = {pangolinPic} className={css`
+                <img src = {pangolinTalk} className={css`
                     width: 400px;
                     float: left;
                     @media (max-width: 420px) {

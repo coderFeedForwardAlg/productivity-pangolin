@@ -14,6 +14,7 @@ import Logout from './components/logout';
 import NewBreak from './components/NewBreak';
 import Settings from './components/Settings';
 import Music from "./components/Music";
+import Room from './components/Room';
 
 
 
@@ -84,6 +85,9 @@ function App() {
 
             <Route  path="/settings">
               <Settings/>
+            </Route>
+            <Route  path="/room">
+              <Room/>
             </Route>
 
 
