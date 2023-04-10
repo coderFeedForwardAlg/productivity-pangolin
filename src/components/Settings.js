@@ -31,6 +31,11 @@ const Settings = () => {
         dispatch(setColorBlue());    
     }
 
+    // TODO: put in redux 
+    // const updateBreakChecklist = async () => {
+    //     localStorage.setItem("checklis", true);
+    // }
+
     return ( 
         <div className={css`
             background: linear-gradient(to left, ${color[1]}  0%,  ${color[2]} 100%);
@@ -51,16 +56,21 @@ const Settings = () => {
                     font-size: 15px;
                     padding-top: 20%;
                 }
-            `}>You can change the color theme!</h3>
+            `}>Settings</h3>
             <div className={css`
                 display: grid;
-                grid-template-columns: 25%;
+                grid-template-columns: 25% 25% 25% 25%;
+
                 @media (max-width: 720px){
                     grid-template-columns: 100%;
                 }
                 
             `}>
-                
+                <div className={css`
+                display:flex;
+                flex-direction: column;
+                `}>
+                <h1>color themes</h1>
                 <Button2 className={css`background:#663300`} onClick={updateColorGreen}>Green Forest</Button2>
                 
                 <Button2 className={css`background:blueviolet`} onClick={updateColorPurple}>Purple Future</Button2>
@@ -68,7 +78,25 @@ const Settings = () => {
                 <Button2 className={css`background:#990099`} onClick={updateColorPink}>Pink</Button2>
 
                 <Button2 className={css`background:#000099`} onClick={updateColorBlue}>Ocean Blue</Button2>
+                </div>
+                
+                <div></div>
+
+                {/* <div className={css`
+                display:flex;
+                flex-direction: column;`}>
+                <h1>Break Checklist</h1>
+                    <Button2 className={css`background:#663300`} onClick={updateColorGreen}>Green Forest</Button2>
+                    
+                </div> */}
             </div>
+
+            
+
+            
+                
+
+                
             
         </div>
      );

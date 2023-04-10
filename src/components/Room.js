@@ -1,7 +1,6 @@
 import { css } from '@emotion/css';
 import { useSelector } from "react-redux";
 import pangolinPic from './imgs/pangolinImg.png';
-import { useEffect, useState } from 'react';
 import Draggable from 'react-draggable';
 
 
@@ -9,8 +8,6 @@ import Draggable from 'react-draggable';
 
 const Room = () => {
     const color = useSelector((state) => state.color.value);
-    const [xPos, setXPos] = useState(0);
-    const [yPos, setYPos] = useState(0);
    
 
     return ( 
@@ -28,8 +25,9 @@ const Room = () => {
                     <img draggable="false" src = {pangolinPic} className={css`
                         width: 400px;
                         position: absolute;
-                        top: ${yPos}px;
-                        left: ${xPos}px;
+                        top: 50%;
+                        left: 50%;
+                        margin: -200px 0 0 -200px;
                         @media (max-width: 420px) {
                             width: 200px;
                         }

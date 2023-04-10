@@ -6,17 +6,23 @@ import { useHistory } from "react-router-dom";
 import pangolinPic from './imgs/pangolinImg.png';
 import pangolinTalk from './imgs/moreThanNormal.png'
 import StudyMusic from "./StudyMusic";
-import { auth } from "../firebase-config";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {Background} from './styles/Background';
 import { css } from '@emotion/css';
 import { useSelector } from "react-redux";
 import {Button2} from './styles/Button';
+import { db, auth } from '../firebase-config'
+import { collection, query, where, getDocs, orderBy } from 'firebase/firestore'
+import Axios from 'axios';
 
 const NewWorkSesh = () => {
+
     const [user] = useAuthState(auth);
+    const userCollection = collection(db, "productivityData");
+    const [userID, setUserID] = useState("");
     const [notLogIn, setNotLogIn] = useState(<div> </div>)
     const [time, setTime] = useState(25);
+    const [pic, setPic] = useState(pangolinPic)
     const color = useSelector((state) => state.color.value);
     
     const history = useHistory();
@@ -24,6 +30,87 @@ const NewWorkSesh = () => {
         event.preventDefault();
         start();
     }
+
+    // get work data
+    let todayTotalWork = 0;
+    let durationArr = [];
+    let dayOfWeek = [];
+    let day = []; 
+    const getWork = async () => {
+        try{
+          const q = query( collection(db, "productivityData"), where("userID", "==", userID), orderBy("startWorkTime"));
+          const querySnapshot = await getDocs(q);
+          querySnapshot.forEach((doc) => {
+              // for today charts 
+            let today = new Date();
+            if(doc.data().startWorkTime.toDate().getDate() == today.getDate() && doc.data().startWorkTime.toDate().getMonth() == today.getMonth() ){
+              todayTotalWork += doc.data().duration;
+            }
+              //for all time charts 
+            durationArr.push(doc.data().duration);
+            dayOfWeek.push(new Date(doc.data().startWorkTime.seconds*1000).getDay());
+            let spesificDay = doc.data().startWorkTime.toDate();
+            day.push(spesificDay.getDate() +  spesificDay.getMonth() * 31 + spesificDay.getYear() * 365);
+    
+          });
+
+        } catch( err ){
+          console.log(err);
+          console.log("userID");
+        }
+        let normal_ = await normal();
+        console.log("today is "+ parseInt(normal_));
+        if(todayTotalWork > parseInt(normal_)){
+            setPic(pangolinTalk); 
+            
+        }
+
+      };
+
+      const normal =  async () => {
+        const json = {
+          "durationArr" : durationArr,
+          "dayOfWeek": dayOfWeek,
+          "day": day
+    
+        }
+      
+        try {
+          const response = await Axios.post("https://flask-api-kr3iijg4ca-uc.a.run.app/json_example", json);
+          let now = new Date()
+          return response.data[now.getDay()]
+          
+        } catch (error) {
+          if (error.response) {
+            console.log(error.reponse.status);
+          } else {
+            console.log(error.message);
+          }
+        }
+        
+      }
+      const fetchUserID = async () => {
+    
+        try {
+            const q = query(collection(db, "users"), where("uid", "==", user?.uid));
+            const doc = await getDocs(q);
+            const data = doc.docs[0].data();
+            setUserID(data.uid);
+            getWork();
+        } catch (err) {
+            console.error(err);
+            console.log("user?.uid"); 
+        };
+        
+      }
+      useEffect( ()=> {
+        fetchUserID();        
+      },[userID, user]);
+      let fetchRes = <p></p>;
+      if(!user){
+        fetchRes = <p> Their was an error getting your data you may not be signd in or you internet conection may not be working </p>;
+      }
+
 
     
     document.title =  "Pomodoro Timer: Productivity Pangolin";
@@ -84,7 +171,7 @@ const NewWorkSesh = () => {
                     grid-template-rows: 45%; 
                 }
             `}>
-                <img src = {pangolinTalk} className={css`
+                <img src = {pic} className={css`
                     width: 400px;
                     float: left;
                     @media (max-width: 420px) {

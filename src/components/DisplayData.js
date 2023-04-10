@@ -12,6 +12,7 @@ import Axios from 'axios';
 
 
 
+
 const DisplayData = () => {
   const [workSession, setWorkSession] = useState([]);
   const userCollection = collection(db, "productivityData");
@@ -30,8 +31,9 @@ const DisplayData = () => {
   let justTodayFocusAndworkArr = [];
   let todayDurationArr = [];
   let todayFocusArr = [];
-  let day = [];
+  let dayOfWeek = [];
   let avrDir = [];
+  let day = [];
     // useState that sets vars to objects with all the data a chart needs  
   const [workData, setWorkData] = useState({
     labels: labelsArr,
@@ -114,9 +116,13 @@ const DisplayData = () => {
           //for all time charts 
         durationArr.push(doc.data().duration);
         labelsArr.push(new Date(doc.data().startWorkTime.seconds*1000).getDate());
-        day.push(new Date(doc.data().startWorkTime.seconds*1000).getDay());
+          // unnesisary read from firebase ? 
+          dayOfWeek.push(new Date(doc.data().startWorkTime.seconds*1000).getDay());
         focusArr.push(doc.data().productivity);
         focusAndworkArr.push(doc.data().duration * doc.data().productivity);
+        let spesificDay = doc.data().startWorkTime.toDate();
+        day.push(spesificDay.getDate() +  spesificDay.getMonth() * 31 + spesificDay.getYear() * 365);
+
       });
       setWorkSession(querySnapshot.docs.map((doc) => ({...doc.data(), id: doc.id})));
       console.log(durationArr);
@@ -125,9 +131,12 @@ const DisplayData = () => {
       console.log(err);
       console.log("userID");
     }
+    console.log("the day arr is ");
+    console.log(day);
     avrDir = await postData();
     console.log("avr dir" );
     console.log(avrDir.data[0]);
+    postToTree();
     // console.log("post data " + await postData());
   };
   
@@ -232,18 +241,20 @@ const DisplayData = () => {
   const postData =  async () => {
     const json = {
       "durationArr" : durationArr,
+      "dayOfWeek": dayOfWeek,
       "day": day
+
     }
   
     try {
       const response = await Axios.post("https://flask-api-kr3iijg4ca-uc.a.run.app/json_example", json);
-      console.log("responc: ");
+      console.log("responc for day of week stats: ");
       console.log(response);
       setAvrDirData({
         labels: ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saterday"],
         datasets: [
         {
-          label: "avirege deration",
+          label: "average deration",
           data: response.data,
           backgroundColor: color[1],
         }
@@ -260,6 +271,28 @@ const DisplayData = () => {
     
   }
   
+  const postToTree =  async () => {
+    const json = {
+      "durationArr" : durationArr,
+      "day": dayOfWeek,
+      "focusAndWork": focusAndworkArr,
+      "time": day
+    }
+  
+    try {
+      const response = await Axios.post("https://flask-api-kr3iijg4ca-uc.a.run.app/DecisionTree", json);
+      console.log("responc: ");
+      console.log(response);
+      return response
+    } catch (error) {
+      if (error.response) {
+        console.log(error.reponse.status);
+      } else {
+        console.log(error.message);
+      }
+    }
+    
+  }
 
   
 
@@ -280,14 +313,14 @@ const DisplayData = () => {
           <BarChart chartData={todayDurationData} />
           <h4>focus, over time of day</h4>
           <BarChart chartData={todayFocusData} />
-          <h4>average work session deration for each day of the week </h4>
+          <h4>average total amount of work for each day of the week </h4>
           <BarChart chartData={avrDirData} />
-          <h4>time working times focus, over the day of the month</h4>
+          {/* <h4>time working times focus, over the day of the month</h4>
           <BarChart chartData={focusAndWorkData}  />
           <h4>time working, over the day of the month</h4>
           <BarChart chartData={workData} />
           <h4>focus, over the day of the month</h4>
-          <BarChart chartData={focusData} />
+          <BarChart chartData={focusData} /> */}
           
 
           {/*workSession.map( (duration) => {return <div> how long you worked: {duration.duration} </div>}) */}

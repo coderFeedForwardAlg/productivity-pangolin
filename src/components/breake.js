@@ -94,14 +94,14 @@ const Break = () => {
                 background-color: ${color[0]}; 
                 color: ${color[4]};
             `} onClick={wantToEndTimer}> End Break</Button2>
-            <h3 className={css`
+            {/* <h3 className={css`
                 font-size: 30px;
                 color: ${color[4]};
             `}>break checklist!
             <p>exersize <input type="checkbox"/></p>
             <p>think positive thoughts <input type="checkbox"/></p>
-            <p>reword self <input type="checkbox"/></p>
-            </h3>
+            <p>reward  self <input type="checkbox"/></p>
+            </h3> */}
         </div>
      );
 }
