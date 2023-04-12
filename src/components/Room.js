@@ -91,7 +91,7 @@ const Room = () => {
                         console.log(id);
                     }} />
         </div>);
-        setCallID(<div>To join a call, past to call id into the input box and hit join call.</div>);
+        setCallID(<div>To join a call, past to call id into the input box and hit join call. <br/> To start a call hit make call.</div>);
     }
 
     // setRemoteStream(new MediaStream());
@@ -218,7 +218,10 @@ let makeCall = async () => {
       };
 
 
-
+      window.onbeforeunload = function(e) {
+        alert("The timer will be reset if you reload the page");
+        return "Do you want to exit this page? \n your timer will be reset";
+      };
 
     return ( 
         <div className={css`
@@ -269,12 +272,11 @@ let makeCall = async () => {
                     right: 0; 
                     bottom: 0;
                     
-                `}></video>
+                `} muted></video>
 
                 <video id="remote" autoPlay playsInline className={css`
                     position: fixed;
-                    width: 800px;
-                    hight: 800px:
+                    padding: 100px;
                     right: 0; 
                     
                 `}></video>
