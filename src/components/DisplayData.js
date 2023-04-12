@@ -136,8 +136,8 @@ const DisplayData = () => {
     avrDir = await postData();
     console.log("avr dir" );
     console.log(avrDir.data[0]);
-    postToTree();
-    // console.log("post data " + await postData());
+    // postToTree();
+
   };
   
     // fetch the data from fierbase and call getWork() from above 

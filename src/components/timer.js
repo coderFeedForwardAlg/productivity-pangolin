@@ -127,6 +127,12 @@ const pause = () => {
    }
    
     document.title =  displayTime() + " Productivity Pangolin";
+
+    // fix the reloading problem 
+    window.onbeforeunload = function(e) {
+        alert("The timer will be reset if you reload the page");
+        return "Do you want to exit this page? \n your timer will be reset";
+      };
     
     return ( 
         <div className={css`

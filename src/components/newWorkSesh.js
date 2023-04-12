@@ -44,7 +44,7 @@ const NewWorkSesh = () => {
               // for today charts 
             let today = new Date();
             if(doc.data().startWorkTime.toDate().getDate() == today.getDate() && doc.data().startWorkTime.toDate().getMonth() == today.getMonth() ){
-              todayTotalWork += doc.data().duration;
+              todayTotalWork += parseInt(doc.data().duration);
             }
               //for all time charts 
             durationArr.push(doc.data().duration);
@@ -59,8 +59,7 @@ const NewWorkSesh = () => {
           console.log("userID");
         }
         let normal_ = await normal();
-        console.log("today is "+ parseInt(normal_));
-        if(todayTotalWork > parseInt(normal_)){
+        if(parseInt(todayTotalWork) > parseInt(normal_)){
             setPic(pangolinTalk); 
             
         }
