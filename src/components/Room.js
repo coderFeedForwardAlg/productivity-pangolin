@@ -24,7 +24,9 @@ const Room = () => {
     const color = useSelector((state) => state.color.value);
 
     const [buttons, setButtons] = useState(<div> </div>);
-    const [callID, setCallID] = useState(<div> </div>)
+    const [callID, setCallID] = useState(<div> </div>);
+    const [audio, setAudio] = useState(true);
+
     // const [id, setId] = useState("");
     let id = "";
 
@@ -59,7 +61,7 @@ const Room = () => {
 
 
       let startWebCam = async () => {
-        localStream =  await navigator.mediaDevices.getUserMedia({ video: true, audio: true });
+        localStream =  await navigator.mediaDevices.getUserMedia({ video: true, audio: audio });
     
         // Push tracks from local stream to peer connection
         localStream.getTracks().forEach((track) => {
@@ -94,7 +96,7 @@ const Room = () => {
         setCallID(<div>To join a call, past to call id into the input box and hit join call. <br/> To start a call hit make call.</div>);
     }
 
-    // setRemoteStream(new MediaStream());
+
     remoteStream = new MediaStream;
 
 // Pull tracks from remote stream, add to video stream
@@ -115,7 +117,10 @@ remoteVideo.srcObject = remoteStream;
 let makeCall = async () => {
     console.log("make call ran");
     // Reference Firestore collections for signaling
-      const callDoc = firestore.collection('calls').doc();
+    
+    
+    const callDoc = firestore.collection('calls').doc();
+    
     // const q = query(collection(db, "calls"));
     // const callDoc = await getDocs(q);
     // console.log(callDoc);
@@ -169,6 +174,8 @@ let makeCall = async () => {
           if (change.type === 'added') {
             const candidate = new RTCIceCandidate(change.doc.data());
             pc.addIceCandidate(candidate);
+            setButtons(<div></div>);
+            setCallID(<div></div>);
           }
         });
       });
@@ -180,6 +187,8 @@ let makeCall = async () => {
         const callId = id;
         console.log("id is "+ id);
         const callDoc = firestore.collection('calls').doc(callId);
+
+        
         const offerCandidates = callDoc.collection('offerCandidates');
         const answerCandidates = callDoc.collection('answerCandidates');
       
@@ -190,6 +199,12 @@ let makeCall = async () => {
         // Fetch data, then set the offer & answer
       
         const callData = (await callDoc.get()).data();
+
+        // dont use === 
+        if(callData == null){
+          console.log("callData is null, network error?");
+        }
+        
       
         const offerDescription = callData.offer;
         await pc.setRemoteDescription(new RTCSessionDescription(offerDescription));
@@ -212,9 +227,12 @@ let makeCall = async () => {
             if (change.type === 'added') {
               let data = change.doc.data();
               pc.addIceCandidate(new RTCIceCandidate(data));
+              setButtons(<div></div>);
+              setCallID(<div></div>);
             }
           });
         });
+        
       };
 
 
@@ -278,10 +296,10 @@ let makeCall = async () => {
                     position: fixed;
                     padding: 100px;
                     right: 0; 
-                    
                 `}></video>
                 {callID}
                 {buttons}
+
         </div>
      );
 }
