@@ -40,7 +40,7 @@ const VideoCall = () => {
         let player = `<div class="video-container" id="user-container-${UID}">
         <div class="video-player" id="user-${UID}"></div>
   </div>`;
-document.getElementById('video-streams').insertAdjacentHTML('beforeend', player)
+document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
 
         localTracks[1].play(`user-${UID}`)
         
@@ -60,7 +60,7 @@ document.getElementById('video-streams').insertAdjacentHTML('beforeend', player)
          player = `<div class="video-container" id="user-container-${user.uid}">
                 <div class="video-player" id="user-${user.uid}"></div>
         </div>`;
-        document.getElementById('video-streams').insertAdjacentHTML('beforeend', player);
+        document.getElementById('other-stream').insertAdjacentHTML('beforeend', player);
         user.videoTrack.play(`user-${user.uid}`);
         if(mediaType === "audio"){
             user.audioTrack.play();
@@ -89,7 +89,23 @@ document.getElementById('video-streams').insertAdjacentHTML('beforeend', player)
        {/* <button id="join-btn">Join Stream</button> */}
 
 <div id="stream-wrapper" >
-    <div id="video-streams" ></div>
+    <div id="other-stream" className={css`
+        position: fixed; 
+        bottom:0;
+        right:0;
+        display:grid;
+        
+        height: 800px;
+        width: 800px;
+    `} ></div>
+    <div id="your-stream" className={css`
+        position:fixed;
+        bottom:0;
+        display:grid;
+        
+        height: 200px;
+        width: 200px;
+    `} ></div>
     {/* <div id="stream-controls">
         <button id="leave-btn">Leave Stream</button>
         <button id="mic-btn">Mic On</button>
