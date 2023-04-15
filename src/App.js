@@ -15,7 +15,7 @@ import NewBreak from './components/NewBreak';
 import Settings from './components/Settings';
 import Music from "./components/Music";
 import Room from './components/Room';
-
+import VideoCall from './components/VideoCall';
 
 
 function App() {
@@ -88,6 +88,9 @@ function App() {
             </Route>
             <Route  path="/room">
               <Room/>
+            </Route>
+            <Route  path="/call">
+              <VideoCall/>
             </Route>
 
 
