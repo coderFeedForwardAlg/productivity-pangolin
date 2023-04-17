@@ -18,7 +18,9 @@ const Landing = () => {
             </h1> 
             <br/>
             <h3 className={css`color: ${color[4]};`}>
-                This is a great place to make sure you are working hard and taking breaks! 
+                This is a great place to make sure you are working hard and taking breaks! <br/>
+                Go to the work tab to start a work session. <br/>
+                Go the the data tab to see your progress.
             </h3>
         </div>
      );

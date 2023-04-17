@@ -32,7 +32,9 @@ const VideoCall = () => {
         setLoading( <div>Loading ... </div>);
         client.on("user-published", handleUserJoind);
 
-        UID = await client.join(AGORA_APP_ID, "main", AGORA_TOKEN, null);
+        UID = await client.join(AGORA_APP_ID, "main", AGORA_TOKEN, null).then(
+        console.log(UID)
+        );
 
         localTracks = await AgoraRTC.createMicrophoneAndCameraTracks();
 
@@ -62,9 +64,9 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
         </div>`;
         document.getElementById('other-stream').insertAdjacentHTML('beforeend', player);
         user.videoTrack.play(`user-${user.uid}`);
-        if(mediaType === "audio"){
-            user.audioTrack.play();
-        }
+        // if(mediaType === "audio"){ // this led to their not beeing audio 
+            user.audioTrack.play(); // need user id?? 
+        // }
     }
 
     
@@ -80,8 +82,8 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
 
        <br/>
        <h2>{loading}</h2>
-       <Button2  className={css`background-color: ${color[0]}; `} onClick={joinAndDisplayLocalStreem}>
-            cklick to join streem
+       <Button2  className={css`background-color: ${color[0]};  `} onClick={joinAndDisplayLocalStreem}>
+            click to join stream
        </Button2>
        <br/>
        <br/>
