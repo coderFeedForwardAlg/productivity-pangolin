@@ -24,6 +24,8 @@ const VideoCall = () => {
     let localTracks = [];
     let remoteUsers = {};
 
+    
+
     let UID = "this will be the UID";
 
     const [loading, setLoading] = useState( <div></div>); 
@@ -32,11 +34,15 @@ const VideoCall = () => {
         setLoading( <div>Loading ... </div>);
         client.on("user-published", handleUserJoind);
 
+        client.on('user-left', handleUserLeft);
+
         UID = await client.join(AGORA_APP_ID, "main", AGORA_TOKEN, null).then(
         console.log(UID)
         );
 
         localTracks = await AgoraRTC.createMicrophoneAndCameraTracks();
+        console.log("****************************");
+        console.log(localTracks[0]);
 
         
         let player = `<div class="video-container" id="user-container-${UID}">
@@ -69,7 +75,42 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
         // }
     }
 
+        
+    let handleUserLeft = async (user) => {
+        delete remoteUsers[user.uid]
+        document.getElementById(`user-container-${user.uid}`).remove()
+    }
+
+    let leaveAndRemoveLocalStream = async (localTracks) => {
+
+        console.log("leave function done");
+        console.log(localTracks);
+
+        for(let i = 0; localTracks.length > i; i++){
+            localTracks[i].stop()
+            localTracks[i].close()
+            localTracks[i] = undefined;
+        }
+
+        
     
+        await client.leave();
+
+    }
+
+    let toggleMic = async () => {
+        // console.log(localTracks[0]);
+        if (localTracks[0].muted){
+            await localTracks[0].setMuted(false)
+            // e.target.innerText = 'Mic on'
+            // e.target.style.backgroundColor = 'cadetblue'
+        }else{
+            await localTracks[0].setMuted(true)
+        //     e.target.innerText = 'Mic off'
+        //     e.target.style.backgroundColor = '#EE4B2B'
+        }
+    }
+
     
     return ( 
         <div className={css`
@@ -82,9 +123,19 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
 
        <br/>
        <h2>{loading}</h2>
+       
+       <Button2  className={css`background-color: ${color[0]};  `} onClick={toggleMic}>
+            mic
+       </Button2>
        <Button2  className={css`background-color: ${color[0]};  `} onClick={joinAndDisplayLocalStreem}>
             click to join stream
        </Button2>
+       <Button2  className={css`background-color: ${color[0]};  `} onClick={leaveAndRemoveLocalStream}>
+            leave
+       </Button2>
+       
+       
+       
        <br/>
        <br/>
        <br/>
