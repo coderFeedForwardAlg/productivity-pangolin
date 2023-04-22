@@ -11,7 +11,7 @@ import {Background} from './styles/Background';
 import { css } from '@emotion/css';
 import { useSelector } from "react-redux";
 import {Button2} from './styles/Button';
-import { db, auth } from '../firebase-config'
+import { db, auth } from '../firebase-config';
 import { collection, query, where, getDocs, orderBy } from 'firebase/firestore'
 import Axios from 'axios';
 
