@@ -16,10 +16,36 @@ import { useHistory } from "react-router-dom";
 import Axios from 'axios';
 
 const VideoCall = () => {
+
     
     const color = useSelector((state) => state.color.value);
 
     const client = AgoraRTC.createClient({mode: "rtc", codec: "vp8"});
+        // make sure this gets run
+    const handleUserJoind = async (user, mediaType) =>{
+        remoteUsers[user.uid] = user 
+        await client.subscribe(user, mediaType)
+
+        if (mediaType === 'video'){
+            let player = document.getElementById(`user-container-${user.uid}`)
+            if (player != null){
+                player.remove()
+            }
+
+            player = `<div class="video-container" id="user-container-${user.uid}">
+                            <div class="video-player" id="user-${user.uid}"></div> 
+                    </div>`
+            document.getElementById('other-stream').insertAdjacentHTML('beforeend', player)
+
+            user.videoTrack.play(`user-${user.uid}`)
+        }
+
+        if (mediaType === 'audio'){
+            user.audioTrack.play()
+        }
+    }
+    
+    
 
     // for authenticating users 
     const [user] = useAuthState(auth);
@@ -39,6 +65,10 @@ const VideoCall = () => {
 
     const [loading, setLoading] = useState( <div></div>); 
 
+
+    client.on("user-published", handleUserJoind);
+
+
     const makeCall = () =>{
         // get call nubmer 
         // relying on no to random number being the same at the same time
@@ -51,7 +81,7 @@ const VideoCall = () => {
         // actuly make the call/ stream 
         joinAndDisplayLocalStreem(callNum);
     }
-    const [callNum, setCallNum] = useState(null);
+    let callNum = null; 
     const joinCall = () =>{
         setGetNum(
             <div className= {css`
@@ -73,21 +103,27 @@ const VideoCall = () => {
                     <label id="new-work-lable"><h2 className={css`color: ${color[4]};`}>What is the call number?</h2></label>
 
                     <input placeholder="ex: 1948653696" onChange={(e)=>{
-                        setCallNum(e.target.value);
+                        callNum = (e.target.value);
                     }}/>
 
                  </form>
             </div>
         );
+
     }
     const handleCallNumSubmit = (event) =>{
         event.preventDefault();
-        joinAndDisplayLocalStreem(callNum);
+        console.log("about to joined and dispay")
+        joinAndDisplayLocalStreem(callNum).then(console.log("join and sisplay called"));
+
+        console.log("******************* submit handeld ****************")
+
     }
 
-
+    
     const joinAndDisplayLocalStreem = async (callNum) =>{
-        setLoading( <div>Loading ... </div>);
+        // setLoading( <div>Loading ... </div>);
+        console.log("startin join and sisplay funciton ");
         client.on("user-published", handleUserJoind);
 
         // client.on('user-left', handleUserLeft);
@@ -97,6 +133,8 @@ const VideoCall = () => {
         let response;
         try {
             response = await Axios.get(`https://flask-api-kr3iijg4ca-uc.a.run.app/get_token/${callNum}`);
+            console.log("axos responce ");
+            console.log(response);
           } catch (error) {
             if (error.response) {
               console.log(error.reponse.status);
@@ -111,8 +149,8 @@ const VideoCall = () => {
         UID = await client.join(AGORA_APP_ID, `${callNum}`, token, null); 
 
         localTracks = await AgoraRTC.createMicrophoneAndCameraTracks();
-        console.log("****************************");
-        console.log(localTracks[0]);
+        console.log("***********local tracks *****************");
+        console.log(localTracks[1]);
 
         
         let player = `<div class="video-container" id="user-container-${UID}">
@@ -121,29 +159,16 @@ const VideoCall = () => {
 document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
 
         localTracks[1].play(`user-${UID}`)
+
         
-
-        await client.publish([localTracks[0], localTracks[1]]).then(setLoading(<div></div>));
+        console.log("made it to line 158");
+        await client.publish([localTracks[0], localTracks[1]])//.then(setLoading(<div></div>));
+        console.log("made it to line 160");
 
     }
 
 
-    const handleUserJoind = async (user, mediaType) =>{
-        remoteUsers[user.uid] = user;
-        await client.subscribe(user, mediaType);
-        let player = document.getElementById(`user-container-${user.uid}`)
-        if(player != null){
-            player.remove();
-        }
-         player = `<div class="video-container" id="user-container-${user.uid}">
-                <div class="video-player" id="user-${user.uid}"></div>
-        </div>`;
-        document.getElementById('other-stream').insertAdjacentHTML('beforeend', player);
-        user.videoTrack.play(`user-${user.uid}`);
-        // if(mediaType === "audio"){ // this led to their not beeing audio 
-            user.audioTrack.play(); // need user id?? 
-        // }
-    }
+    
 
         
     let handleUserLeft = async (user) => {
@@ -239,10 +264,10 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
             mic
        </Button2>
        <Button2  className={css`background-color: ${color[0]};  `} onClick={makeCall}>
-            click to creat call
+            Click to create call
        </Button2>
        <Button2  className={css`background-color: ${color[0]};  `} onClick={joinCall}>
-            click to join call
+            Click to join call
        </Button2>
        
        
