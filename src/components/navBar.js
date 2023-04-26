@@ -118,6 +118,7 @@ const NavBar = () => {
                 <li><Link to={link} className='brandLink'><h1 className={css`color: ${color[4]};`}>{title}</h1> </Link> </li>
                 <li><Link to="/display" className='brandLink'><h1 className={css`color: ${color[4]};`}>Data</h1> </Link></li> 
                 <li><Link to="/settings" className='brandLink'><h1 className={css`color: ${color[4]};`}> Settings</h1> </Link></li>
+                <li><Link to="/call" className='brandLink'><h1 className={css`color: ${color[4]};`}> Accountability Call</h1> </Link></li>
             </ul>
 
             

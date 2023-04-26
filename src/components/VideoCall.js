@@ -21,6 +21,8 @@ const VideoCall = () => {
     const color = useSelector((state) => state.color.value);
 
     const client = AgoraRTC.createClient({mode: "rtc", codec: "vp8"});
+    const [clientStat, setClintStat] = useState(client);
+
         // make sure this gets run
     const handleUserJoind = async (user, mediaType) =>{
         remoteUsers[user.uid] = user 
@@ -43,6 +45,7 @@ const VideoCall = () => {
         if (mediaType === 'audio'){
             user.audioTrack.play()
         }
+        setCallNumDis(<div></div>);
     }
     
     
@@ -54,6 +57,9 @@ const VideoCall = () => {
     
 
     let localTracks = [];
+    const [audio, setAudio] = useState(null);
+    const [video, setVideo] = useState(null);
+    
     let remoteUsers = {};
 
     // for displaying call number 
@@ -67,7 +73,7 @@ const VideoCall = () => {
 
 
     client.on("user-published", handleUserJoind);
-
+    
 
     const makeCall = () =>{
         // get call nubmer 
@@ -76,11 +82,16 @@ const VideoCall = () => {
         let callNum = Math.floor(Math.random() * 9999999999);
 
         // display number 
-        setCallNumDis(<div>The call number is {callNum}. <br/> Send it you your accountability partner so they can join the call.</div>);
+        setCallNumDis(<div>The call number is {callNum}. <br/> Send it to your accountability partner so they can join the call.</div>);
 
         // actuly make the call/ stream 
         joinAndDisplayLocalStreem(callNum);
     }
+    const [makeBut, setMakeBut] = useState(
+        <Button2  className={css`background-color: ${color[0]};  `} onClick={makeCall}>
+            Click to create call
+       </Button2>
+    );
     let callNum = null; 
     const joinCall = () =>{
         setGetNum(
@@ -111,22 +122,24 @@ const VideoCall = () => {
         );
 
     }
+    const [joinBut, setJoinBut] = useState(
+        <Button2  className={css`background-color: ${color[0]};  `} onClick={joinCall}>
+                Click to join call
+        </Button2>
+    );
     const handleCallNumSubmit = (event) =>{
         event.preventDefault();
-        console.log("about to joined and dispay")
-        joinAndDisplayLocalStreem(callNum).then(console.log("join and sisplay called"));
-
-        console.log("******************* submit handeld ****************")
-
+        joinAndDisplayLocalStreem(callNum);
+        
     }
 
     
     const joinAndDisplayLocalStreem = async (callNum) =>{
-        // setLoading( <div>Loading ... </div>);
+        setLoading( <div>Loading ... </div>);
         console.log("startin join and sisplay funciton ");
         client.on("user-published", handleUserJoind);
 
-        // client.on('user-left', handleUserLeft);
+        client.on('user-left', handleUserLeft);
 
 
         // get token 
@@ -148,7 +161,10 @@ const VideoCall = () => {
          // used `` to make sure its a string 
         UID = await client.join(AGORA_APP_ID, `${callNum}`, token, null); 
 
+
         localTracks = await AgoraRTC.createMicrophoneAndCameraTracks();
+        setAudio(localTracks[0]);
+        setVideo(localTracks[1]);
         console.log("***********local tracks *****************");
         console.log(localTracks[1]);
 
@@ -160,11 +176,8 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
 
         localTracks[1].play(`user-${UID}`)
 
-        
-        console.log("made it to line 158");
-        await client.publish([localTracks[0], localTracks[1]])//.then(setLoading(<div></div>));
-        console.log("made it to line 160");
-
+        await client.publish([localTracks[0], localTracks[1]]);
+        removeStartButs();
     }
 
 
@@ -174,34 +187,48 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
     let handleUserLeft = async (user) => {
         delete remoteUsers[user.uid]
         document.getElementById(`user-container-${user.uid}`).remove()
+        document.getElementById('your-stream').innerHTML = '';
+
+        console.log("user leaft function");
+        addStartButs();
     }
+    client.on('user-left', handleUserLeft);
 
 
-    let leaveAndRemoveLocalStream = async () => {
+    let leaveAndRemoveLocalStream = async (localTracks) => {
         console.log("****************************");
         console.log("leave function done");
+        await clientStat.leave();
+
         console.log(localTracks);
 
-        for(let i = 0; localTracks.length > i; i++){
-            localTracks[i].stop()
-            localTracks[i].close()
-            // localTracks[i] = undefined;
-        }
 
-        
+        // for(let i = 0; localTracks.length > i; i++){
+
+            audio.stop()
+            video.stop()
+            audio.close()
+            video.close()
+            // localTracks[i] = undefined;
+        // }
+        // make batter with react 
+        document.getElementById('other-stream').innerHTML = '';
+        document.getElementById('your-stream').innerHTML = '';
+
+        addStartButs();
     
-        await client.leave();
+        
 
     }
 
     let toggleMic = async () => {
         // console.log(localTracks[0]);
-        if (localTracks[0].muted){
-            await localTracks[0].setMuted(false)
+        if (audio.muted){
+            await audio.setMuted(false)
             // e.target.innerText = 'Mic on'
             // e.target.style.backgroundColor = 'cadetblue'
         }else{
-            await localTracks[0].setMuted(true)
+            await audio.setMuted(true)
         //     e.target.innerText = 'Mic off'
         //     e.target.style.backgroundColor = '#EE4B2B'
         }
@@ -239,6 +266,26 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
         }
         
     }, []);
+
+    // remove the start call buttons 
+    const removeStartButs = () =>{
+        setJoinBut(<div></div>);
+        setMakeBut(<div></div>);
+        setGetNum(<div></div>);
+        setLoading(<div></div>);
+    }
+    const addStartButs = () =>{
+        setJoinBut(
+        <Button2  className={css`background-color: ${color[0]};  `} onClick={joinCall}>
+            Click to join call
+        </Button2>);
+
+        setMakeBut(
+        <Button2  className={css`background-color: ${color[0]};  `} onClick={makeCall}>
+            Click to create call
+       </Button2>);
+
+    }
     
 
     
@@ -257,18 +304,14 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
        {getNum}
        {loading}
        {callNumDis}
-       <Button2  className={css`background-color: ${color[0]};  `} onClick={leaveAndRemoveLocalStream}>
+       <Button2  className={css`background-color: ${color[0]};  `} onClick={ () =>{leaveAndRemoveLocalStream(localTracks)}}>
             leave
        </Button2>
        <Button2  className={css`background-color: ${color[0]};  `} onClick={toggleMic}>
             mic
        </Button2>
-       <Button2  className={css`background-color: ${color[0]};  `} onClick={makeCall}>
-            Click to create call
-       </Button2>
-       <Button2  className={css`background-color: ${color[0]};  `} onClick={joinCall}>
-            Click to join call
-       </Button2>
+       {makeBut}
+       {joinBut}
        
        
        
