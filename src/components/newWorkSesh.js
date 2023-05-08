@@ -7,7 +7,7 @@ import pangolinPic from './imgs/pangolinImg.png';
 import pangolinTalk from './imgs/moreThanNormal.png'
 import StudyMusic from "./StudyMusic";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {Background} from './styles/Background';
+import {Background2} from './styles/Background';
 import { css } from '@emotion/css';
 import { useSelector } from "react-redux";
 import {Button2} from './styles/Button';
@@ -154,15 +154,9 @@ const NewWorkSesh = () => {
         history.push(`/login`);
     }
         //TODO: fix stile of pic 
+
     return ( 
-        <div className={css`
-            text-align: center;
-            padding-top: 10%;
-            background: linear-gradient(to left, ${color[1]}  0%, ${color[2]} 100%);
-            background-size: cover;
-            height: 100vh;
-            
-        `}>
+        <Background2 colorL={color[1]}  colorR={color[2]}>
             <div className={css`
                 margin-left:10%;
                 @media (max-width: 420px) {
@@ -201,7 +195,7 @@ const NewWorkSesh = () => {
             
             {/* <StudyMusic /> */}
             
-        </div>
+        </Background2>
      );
 }
  

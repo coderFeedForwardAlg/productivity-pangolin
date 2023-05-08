@@ -3,6 +3,7 @@ import { useEffect } from "react";
 import { useHistory } from "react-router-dom";
 import { Button2 } from "./styles/Button";
 import { css } from '@emotion/css';
+import { Background } from "./styles/Background";
 import { useSelector } from "react-redux";
 
 const NewBreak = () => {
@@ -23,14 +24,7 @@ const NewBreak = () => {
 
 
     return ( 
-        <div className={css`
-            background: linear-gradient(to left, ${color[1]}  0%,  ${color[2]} 100%);
-            background-size: cover;
-            height: 100vh;
-            text-align: center;
-            font-size: large;
-            padding-top: 10%;
-        `}>
+        <Background colorL={color[1]}  colorR={color[2]}>
             <form onSubmit={handleSubmit}>
                 <h2 className={css`color: ${color[4]};`}>How Long Do You Want to Take a Break</h2>
                 <input placeholder="5" onChange={(e)=>{
@@ -41,7 +35,7 @@ const NewBreak = () => {
                 
             </form>
             <Button2 className={css`background-color: ${color[0]}; color: ${color[4]};`} onClick={start}>Start</Button2>
-        </div>
+        </Background>
      );
 }
  

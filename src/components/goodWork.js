@@ -7,6 +7,7 @@ import { useState } from "react";
 import { css } from '@emotion/css'
 import { useSelector } from "react-redux";
 import {Button2} from './styles/Button';
+import { Background } from "./styles/Background";
 
 const GoodWork = () => {
     const { time } = useParams();
@@ -53,13 +54,7 @@ const GoodWork = () => {
     document.title =  "Pomodoro Timer: Productivity Pangolin";
     
     return ( 
-        <div className={css`
-            text-align: center;
-            font-size: large;
-            background: linear-gradient(to left, ${color[1]}  0%,  ${color[2]} 100%);
-            background-size: cover;
-            height: 100vh;
-        `}>
+        <Background colorL={color[1]}  colorR={color[2]}>
             <h1 className={css`
                 padding-top:10%;
                 color: ${color[4]};
@@ -81,7 +76,7 @@ const GoodWork = () => {
             `} onClick={start}>
                 Take a Break
             </Button2>
-        </div>
+        </Background>
      );
 }
  

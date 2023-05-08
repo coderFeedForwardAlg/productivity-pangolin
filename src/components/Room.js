@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import { Background } from './styles/Background';
 import { useSelector } from "react-redux";
 import pangolinPic from './imgs/pangolinImg.png';
 import Draggable from 'react-draggable';
@@ -242,13 +243,7 @@ let makeCall = async () => {
       };
 
     return ( 
-        <div className={css`
-            padding-top: 200px;
-            color: ${color[4]};
-            background: linear-gradient(to left, ${color[1]}  0%,  ${color[2]} 100%);
-            height: 100vh;
-            background-size: cover;
-        `}>
+        <Background colorL={color[1]}  colorR={color[2]}>
             
                 {/* <Draggable>
                     <img draggable="false" src = {pangolinPic} className={css`
@@ -300,7 +295,7 @@ let makeCall = async () => {
                 {callID}
                 {buttons}
 
-        </div>
+        </Background>
      );
 }
  

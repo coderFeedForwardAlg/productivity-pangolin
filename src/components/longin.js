@@ -4,6 +4,7 @@ import { Link, useHistory} from "react-router-dom"; // not sure that useNavigat 
 import { auth, logInWithEmailAndPassword, signInWithGoogle } from "../firebase-config";
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { css } from '@emotion/css';
+import { Background } from "./styles/Background";
 import { useSelector } from "react-redux";
 import { Button2 } from "./styles/Button";
 import "../login.css";
@@ -20,15 +21,11 @@ const Longin = () => {
                 // TODO: trigger loading screen 
             return; 
         }
-        if (user) history.push("/work"); // use history  
+        if (user) history.push("/library"); // use history  
     }, [user,loading]);
 
     return ( 
-        <div className={css`
-            background: linear-gradient(to left,${color[1]}  0%,  ${color[2]} 100%);
-            background-size: cover;
-            height: 100vh;
-        `}>
+        <Background colorL={color[1]}  colorR={color[2]}>
             <div className="login-container">
                 <input
                     type="text"
@@ -80,7 +77,7 @@ const Longin = () => {
                 </div>
 
             </div>
-        </div>
+        </Background>
      );
 }
  

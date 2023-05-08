@@ -16,6 +16,7 @@ import Settings from './components/Settings';
 import Music from "./components/Music";
 import Room from './components/Room';
 import VideoCall from './components/VideoCall';
+import Library from './components/Library';
 
 
 function App() {
@@ -91,6 +92,9 @@ function App() {
             </Route>
             <Route  path="/call">
               <VideoCall/>
+            </Route>
+            <Route path="/library">
+              <Library/>
             </Route>
 
 

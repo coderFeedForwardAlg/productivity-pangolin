@@ -1,11 +1,10 @@
 import { css } from '@emotion/css';
+import { Background } from './styles/Background';
 import { useSelector } from "react-redux";
-
 
 import { useEffect, useState } from 'react';
 
 import AgoraRTC from "agora-rtc-sdk-ng";
-
 
 import {Button2} from './styles/Button';
 import { AGORA_APP_ID, AGORA_TOKEN } from './env';
@@ -14,6 +13,7 @@ import { useAuthState } from "react-firebase-hooks/auth";
 import { auth } from '../firebase-config';
 import { useHistory } from "react-router-dom";
 import Axios from 'axios';
+
 
 const VideoCall = () => {
 
@@ -42,9 +42,9 @@ const VideoCall = () => {
             user.videoTrack.play(`user-${user.uid}`)
         }
 
-        if (mediaType === 'audio'){
-            user.audioTrack.play()
-        }
+        // if (mediaType === 'audio'){
+        //     user.audioTrack.play()
+        // }
         setCallNumDis(<div></div>);
     }
     
@@ -90,7 +90,7 @@ const VideoCall = () => {
     }
     const [makeBut, setMakeBut] = useState(
         <Button2  className={css`background-color: ${color[0]};  `} onClick={makeCall}>
-            Click to create call
+            Enter the library
        </Button2>
     );
     let callNum = null; 
@@ -125,7 +125,7 @@ const VideoCall = () => {
     }
     const [joinBut, setJoinBut] = useState(
         <Button2  className={css`background-color: ${color[0]};  `} onClick={joinCall}>
-                Click to join call
+                
         </Button2>
     );
     const handleCallNumSubmit = (event) =>{
@@ -147,7 +147,7 @@ const VideoCall = () => {
         // get token 
         let response;
         try {
-            response = await Axios.get(`https://flask-api-kr3iijg4ca-uc.a.run.app/get_token/${callNum}`);
+            response = await Axios.get(`https://flask-api-kr3iijg4ca-uc.a.run.app/get_token/main`);
             console.log("axos responce ");
             console.log(response);
           } catch (error) {
@@ -161,7 +161,7 @@ const VideoCall = () => {
          console.log(response);
 
          // used `` to make sure its a string 
-        UID = await client.join(AGORA_APP_ID, `${callNum}`, token, null); 
+        UID = await client.join(AGORA_APP_ID, `main`, token, null); 
 
 
         localTracks = await AgoraRTC.createMicrophoneAndCameraTracks();
@@ -320,7 +320,7 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
 
         setMakeBut(
         <Button2  className={css`background-color: ${color[0]};  `} onClick={makeCall}>
-            Click to create call
+            Enter the library
        </Button2>);
 
     }
@@ -354,18 +354,15 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
     `}>
 
 {/* add login requierment back in later  */}
-       {/* {notLogIn}  */}
-       
+       {notLogIn} 
 
-       {getNum}
+       {/* {getNum} */}
        {loading}
-       {callNumDis}
-       <Button2  className={css`background-color: ${color[0]};  `} onClick={ () => {toggleMic(localTracks)}}>
-                    mic
-        </Button2>
+       {/* {callNumDis} */}
+        
        {videoButs}
        {makeBut}
-       {joinBut}
+       {/* {joinBut} */}
        {readyToJoinCard}
        
        
@@ -383,9 +380,16 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
         right:0;
         display:grid;
         
-        height: 800px;
-        width: 800px;
-        pointer-events: none;
+        // height: 100%;
+        // width: 100%;
+        display:grid;
+        display:grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    height: 90vh;
+    width: 1400px;
+    margin:0 auto;
+    pointer-events: none;
+
     `} ></div>
     <div id="your-stream" className={css`
         position:fixed;

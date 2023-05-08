@@ -3,6 +3,7 @@ import { useHistory, useParams } from 'react-router-dom';
 import {Button2} from './styles/Button';
 import sound from './sound/mixkit-attention-bell-ding-586.wav';
 import { css } from '@emotion/css';
+import { Background } from './styles/Background';
 import { useSelector } from "react-redux";
 
 
@@ -135,17 +136,8 @@ const pause = () => {
       };
     
     return ( 
-        <div className={css`
-            background: linear-gradient(to left,${color[1]}  0%,  ${color[2]}  100%);
-            text-align: center;
-            font-size: 200px; 
-            width: 100%;
-            background-size: cover;
-            height: 100vh;
-            color: ${color[4]};
-            @media (max-width: 420px){
-                font-size: 50px; 
-            }
+        <Background colorL={color[1]} colorR={color[2]} className={css`
+        color: ${color[4]};
         `}>
             <h3 className={css`
                 font-size: 40px;
@@ -167,7 +159,7 @@ const pause = () => {
             `} onClick={wantToEndTimer}> End Timer</Button2>
             
 
-        </div>
+        </Background>
      );
 }
  

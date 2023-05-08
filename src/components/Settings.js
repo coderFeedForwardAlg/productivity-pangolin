@@ -1,4 +1,5 @@
 import { css } from '@emotion/css';
+import { Background } from './styles/Background';
 import { Button2 } from "./styles/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { setColorPurple, setColorGreen, setColorPink, setColorBlue} from "../redux/color";
@@ -37,17 +38,7 @@ const Settings = () => {
     // }
 
     return ( 
-        <div className={css`
-            background: linear-gradient(to left, ${color[1]}  0%,  ${color[2]} 100%);
-            text-align: center;
-            width: 100%;
-            background-size: cover;
-            min-height: 100vh;
-            height: max-content;
-            @media (max-width: 420px) {
-                font-size: 10px;
-            }
-        `}>
+        <Background colorL={color[1]}  colorR={color[2]}>
             <h3 className={css`
                 font-size: 40px;
                 padding-top: 10%;
@@ -98,7 +89,7 @@ const Settings = () => {
 
                 
             
-        </div>
+        </Background>
      );
 }
  
