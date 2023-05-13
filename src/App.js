@@ -14,9 +14,10 @@ import Logout from './components/logout';
 import NewBreak from './components/NewBreak';
 import Settings from './components/Settings';
 import Music from "./components/Music";
-import Room from './components/Room';
+import RTC from './components/RTC';
 import VideoCall from './components/VideoCall';
 import Library from './components/Library';
+import Room from './components/Room';
 
 
 function App() {
@@ -87,8 +88,8 @@ function App() {
             <Route  path="/settings">
               <Settings/>
             </Route>
-            <Route  path="/room">
-              <Room/>
+            <Route  path="/RTC">
+              <RTC/>
             </Route>
             <Route  path="/call">
               <VideoCall/>
@@ -96,6 +97,11 @@ function App() {
             <Route path="/library">
               <Library/>
             </Route>
+
+            <Route>
+              <Room/>
+            </Route>
+
 
 
         </Switch>
