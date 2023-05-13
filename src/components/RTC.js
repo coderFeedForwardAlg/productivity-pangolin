@@ -20,7 +20,7 @@ import { div } from '@tensorflow/tfjs';
 
 
 
-const Room = () => {
+const RTC = () => {
     
     const color = useSelector((state) => state.color.value);
 
@@ -299,4 +299,4 @@ let makeCall = async () => {
      );
 }
  
-export default Room;
+export default RTC;
