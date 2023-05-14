@@ -89,7 +89,7 @@ const VideoCall = () => {
         readyToJoin();
     }
     const [makeBut, setMakeBut] = useState(
-        <Button2  className={css`background-color: ${color[0]};  `} onClick={makeCall}>
+        <Button2  className={css`background-color: ${color[0]};   position: absolute; top: 50%; left: 50% ; transform: translate(-50%, -50%) `} onClick={makeCall}>
             Enter the library
        </Button2>
     );
@@ -123,9 +123,11 @@ const VideoCall = () => {
         );
 
     }
+
+    // i dont think this button dose anthing ???? 
     const [joinBut, setJoinBut] = useState(
         <Button2  className={css`background-color: ${color[0]};  `} onClick={joinCall}>
-                
+                join
         </Button2>
     );
     const handleCallNumSubmit = (event) =>{
@@ -281,6 +283,7 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
         if(user){
             setNotLogIn(<div></div>)
         }else{
+            setMakeBut(<div></div>)
             setNotLogIn(
                 <div className= {css`
                     font-size: 20px;
@@ -319,7 +322,7 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
         </Button2>);
 
         setMakeBut(
-        <Button2  className={css`background-color: ${color[0]};  `} onClick={makeCall}>
+        <Button2  className={css`background-color: ${color[0]}; position: absolute; top: 50%; left: 50% ;`} onClick={makeCall}>
             Enter the library
        </Button2>);
 
@@ -329,7 +332,7 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
     const addMicAndLeave = (localTracks) =>{
         setVideoButs(
         <div>
-            <Button2  className={css`background-color: ${color[0]};  `} onClick={ () =>{leaveAndRemoveLocalStream(localTracks)}}>
+            <Button2  className={css`background-color: ${color[0]}; position: relative; z-index:3;  `} onClick={ () =>{leaveAndRemoveLocalStream(localTracks)}}>
                 leave
             </Button2>
             {/* <Button2  className={css`background-color: ${color[0]};  `} onClick={ () => {toggleMic(localTracks)}}>
@@ -385,8 +388,8 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
         display:grid;
         display:grid;
     grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
-    height: 90vh;
-    width: 1400px;
+    height: 100%;
+    width: 100%;
     margin:0 auto;
     pointer-events: none;
 

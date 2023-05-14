@@ -86,10 +86,10 @@ const VideoCall = () => {
 
         // actuly make the call/ stream 
         // joinAndDisplayLocalStreem(callNum);
-        readyToJoin();
+        readyToJoin(callNum);
     }
     const [makeBut, setMakeBut] = useState(
-        <Button2  className={css`background-color: ${color[0]};  `} onClick={makeCall}>
+        <Button2  className={css`background-color: ${color[0]}; position: relative; z-index:3; `} onClick={makeCall}>
             Click to create call
        </Button2>
     );
@@ -131,7 +131,7 @@ const VideoCall = () => {
     const handleCallNumSubmit = (event) =>{
         event.preventDefault();
         // joinAndDisplayLocalStreem(callNum);
-        readyToJoin();
+        readyToJoin(callNum);
         
     }
 
@@ -185,7 +185,8 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
     }
 
     const [readyToJoinCard, setReadyToJoinCard] = useState(<div></div>);
-    const readyToJoin = async () =>{
+
+    const readyToJoin = async (callNum) =>{
         // make a card with your vidio and a button that makes you join
         let localStream =  await navigator.mediaDevices.getUserMedia({ video: true, audio: false });
         setReadyToJoinCard(<div className= {css`
@@ -211,7 +212,7 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
     `} ></video> */}
         
         <h3> Are you ready to join the call?</h3>
-        <Button2  className={css`background-color: ${color[0]};  `} onClick={joinAndDisplayLocalStreem}>
+        <Button2  className={css`background-color: ${color[0]};  `} onClick={ () => {joinAndDisplayLocalStreem(callNum)}}>
             Join Call
        </Button2>
     </div>);
@@ -314,12 +315,12 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
     }
     const addStartButs = () =>{
         setJoinBut(
-        <Button2  className={css`background-color: ${color[0]};  `} onClick={joinCall}>
+        <Button2  className={css`background-color: ${color[0]}; `} onClick={joinCall}>
             Click to join call
         </Button2>);
 
         setMakeBut(
-        <Button2  className={css`background-color: ${color[0]};  `} onClick={makeCall}>
+        <Button2  className={css`background-color: ${color[0]};`} onClick={makeCall}>
             Click to create call
        </Button2>);
 
@@ -329,7 +330,7 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
     const addMicAndLeave = (localTracks) =>{
         setVideoButs(
         <div>
-            <Button2  className={css`background-color: ${color[0]};  `} onClick={ () =>{leaveAndRemoveLocalStream(localTracks)}}>
+            <Button2  className={css`background-color: ${color[0]}; position: relative; z-index:3; `} onClick={ () =>{leaveAndRemoveLocalStream(localTracks)}}>
                 leave
             </Button2>
             {/* <Button2  className={css`background-color: ${color[0]};  `} onClick={ () => {toggleMic(localTracks)}}>
@@ -356,11 +357,11 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
 {/* add login requierment back in later  */}
        {/* {notLogIn}  */}
        
-
+       
        {getNum}
        {loading}
        {callNumDis}
-       <Button2  className={css`background-color: ${color[0]};  `} onClick={ () => {toggleMic(localTracks)}}>
+       <Button2  className={css`background-color: ${color[0]}; position: relative; z-index:3; `} onClick={ () => {toggleMic(localTracks)}}>
                     mic
         </Button2>
        {videoButs}
@@ -382,9 +383,10 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
         bottom:0;
         right:0;
         display:grid;
+        width: 100%;
         
-        height: 800px;
-        width: 800px;
+        height: 100%;
+        
         pointer-events: none;
     `} ></div>
     <div id="your-stream" className={css`
@@ -401,6 +403,7 @@ document.getElementById('your-stream').insertAdjacentHTML('beforeend', player)
         <button id="camera-btn">Camera on</button>
     </div> */}
 </div>
+
       </div>
      );
 }
